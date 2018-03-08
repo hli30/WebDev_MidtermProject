@@ -12,7 +12,11 @@ module.exports = (knex) => {
       .then((results) => {
         res.json(results);
     });
+
+    
   });
+
+  
 
   return router;
 }
