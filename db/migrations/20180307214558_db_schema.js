@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.string("username").notNullable();
       table.string("password").notNullable();
-      
+
       table.integer("contact_id").unsigned();
       table.foreign("contact_id").references("id").inTable("contact");
     }),
@@ -45,6 +45,8 @@ exports.up = function(knex, Promise) {
       table.string("username").notNullable();
       table.string("password").notNullable();
       
+      table.integer("restaurant_id").unsigned();      
+      table.foreign("restaurant_id").references("id").inTable("restaurant");
       table.integer("contact_id").unsigned();      
       table.foreign("contact_id").references("id").inTable("contact");
     }),
@@ -66,13 +68,23 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return Promise.all([
-    knex.schema.dropTable("contact"),
-    knex.schema.dropTable("customer"),
-    knex.schema.dropTable("restaurant"),
-    knex.schema.dropTable("order"),
-    knex.schema.dropTable("owner"),
-    knex.schema.dropTable("menu"),
-    knex.schema.dropTable("food"),
-  ]);
+  return new Promise(knex.schema.dropTable("order"))
+    .then(() => {
+      knex.schema.dropTable("menu")
+    })
+    .then(() => {
+      knex.schema.dropTable("restaurant")
+    })
+    .then(() => {
+      knex.schema.dropTable("owner")
+    })
+    .then(() => {
+      knex.schema.dropTable("customer")
+    })
+    .then(() => {
+      knex.schema.dropTable("contact")
+    })
+    .then(() => {
+      knex.schema.dropTable("food")
+    })
 };
