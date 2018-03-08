@@ -2,8 +2,8 @@
    $('.shopping-cart').hide();
    $('#menu').hide();
 $(document).ready(function() {
-  $(".button-collapse").sideNav();
-  
+
+  // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
        $('.shopping-cart').hide();
@@ -18,6 +18,7 @@ $(document).ready(function() {
     $(".shopping-cart").fadeToggle();
   });
 
+  //shows or hides the menu/restaurant list as needed
   $(".showRestaurantMenu").on("click", function() {
        $('#restList.container').hide();
        $("#menu").show();
@@ -27,15 +28,15 @@ $(document).ready(function() {
        $("#menu").hide();
        $('#restList.container').show();
       })
-
+      //loads the menu data
       const loadMenu = function() {
         $.get("/restaurant/food", renderMenu);
       };
-
+      //loads the restaurant data
       const loadRestaurants= function() {
         $.get("/restaurants", renderRestaurants);
       };
-
+      //renders the menu data with handlebars
       const renderMenu= function(data) {
         var source= $("#menuTemplate").html()
 
@@ -43,7 +44,7 @@ $(document).ready(function() {
         var html = template(data);
         $("#body").html(html);
       }
-
+      //renders the restaurant data with handlebars
       const renderRestaurants= function(data) {
         var source= $("#restTemplate").html()
 
@@ -53,16 +54,16 @@ $(document).ready(function() {
       }
 
 
+
+
+
+
+
+
+
+
+
+
+      //calls the load restaurant lists
       loadRestaurants()
-
-
-
-
-
-
-
-
-
-
-
 })
