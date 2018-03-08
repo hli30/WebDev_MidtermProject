@@ -17,29 +17,23 @@
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Foodify</title>
+  <title>Owner Portal</title>
 
 </head>
 
-<header>
+<body>
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper teal">
         <a href="#" class="brand-logo center">Foodify</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
-          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="badge new red">3</span></a></li>
         </ul>
       </div>
-    </nav>
   </div>
-
-
-</header>
-
- <body>
-
+  </nav>
   <!-- LOGIN & REGISTER -->
+
   <div class="loginreg container white z-depth-2 right">
     <ul class="tabs teal">
       <li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
@@ -116,129 +110,78 @@
     </div>
   </div>
 
-  <!-- Cart -->
-  <div id="shoppingcart" class="container right">
-    <div class="shopping-cart z-depth-2">
-      <div class="shopping-cart-header">
-        <i class="material-icons left">shopping_cart</i></i><span class="badge">3</span>
-        <div class="shopping-cart-total">
-          <span class="lighter-text">Total:</span>
-          <span class="main-color-text">$15.50 taxes incl</span>
-        </div>
-      </div>
-      <!--end shopping-cart-header -->
-
-      <ul class="collection">
-        <li class="collection-item avatar">
-          <img src="../public/images/sandwich-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Sandwich</span>
-          <p>$6.00</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-        <li class="collection-item avatar">
-          <img src="../public/images/soup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Soup</span>
-          <p>$5.00</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-        <li class="collection-item avatar">
-          <img src="../public/images/coffee-cup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Coffee</span>
-          <p>$4.50</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-      </ul>
-      <a href="#" class="waves-effect waves-light btn">Checkout</a>
-    </div>
-    <!--end shopping-cart -->
-  </div>
-  <!--end container -->
-
-  <!-- Restaurant List -->
-  <div id="restlist" class="container z-depth-2">
-    <ul class="collection with-header">
+  <!-- Restaurant Info -->
+  <div id='restaurantList' class="container left">
+    <ul class="collection with-header z-depth-2 ">
       <li class="collection-header">
-        <h4>Restaurants near you</h4></li>
-        <a  href="#!" class="collection-item avatar showRestaurantMenu">
-      <li>
-        <img src="../public/images/basic-restaurant-sign-svgrepo-com.svg" class="circle">
-        <span class="title">Casual Restaurant Name</span>
-        <p>Casual Burger Place<br> Address Info & Phone Number
-        </p>
-      </li>
-    </a>
-      <a  href="#!" class="collection-item avatar showRestaurantMenu">
-      <li>
-        <img src="../public/images/restaurant-covered-plate-on-a-hand-svgrepo-com.svg" alt="" class="circle">
-        <span class="title">Fancy Restaurant Name</span>
-        <p>Fancy Italian <br> Address Info & Phone Number
-        </p>
-      </li>
-    </a>
-      <a  href="#!" class="collection-item avatar showRestaurantMenu">
-      <li>
-        <img src="../public/images/restaurant-svgrepo-com.svg" alt="" class="circle">
-        <span class="title">Fast Food</span>
-        <p>Quick and dirty <br> Address Info & Phone Number
-        </p>
-      </li>
-    </a>
+        <h4>Welcome Owner</h4>
+        <h6>Owner id#</h6>
+        <h6></h6></li>
+      <a href="#!" class="collection-item avatar">
+        <li>
+          <span class="title">Restaurant 1</span>
+          <p># of Sales today: 15 <br> # of sales all time: 400
+          </p>
+        </li>
+      </a>
+      <a href="#!" class="collection-item avatar">
+        <li>
+          <span class="title">Restaurant 2</span>
+          <p># of Sales today: 30 <br> # of sales all time: 987
+          </p>
+        </li>
+      </a>
+      <a href="#!" class="collection-item avatar">
+        <li>
+          <span class="title">Restaurant 3</span>
+          <p># of Sales today: 65 <br> # of sales all time: 1852
+          </p>
+        </li>
+      </a>
+      <a href="#!" class="collection-item avatar">
+        <li>
+          <span class="title">Restaurant 4</span>
+          <p># of Sales today: 10 <br> # of sales all time: 2597
+          </p>
+        </li>
+      </a>
     </ul>
   </div>
 
-
-  <!-- MENU ITEMS -->
-  <div id='menu' class="container z-depth-2 ">
+  <div id='restaurantByID' class="container z-depth-2 ">
     <ul class="collection with-header">
       <li class="collection-header">
         <h4>Restaurant Name</h4>
-        <h6>Restaurant Phone #</h6>
-        <h6>Restaurant Address</h6></li>
-      <a href="#!" class="collection-item avatar" onclick="Materialize.toast('Added to cart', 1500)">
-        <li>
-          <img src="../public/images/soup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Soup</span>
-          <p>Chicken soup with veg <br> $5
-          </p>
-        </li>
-      </a>
-      <a href="#!" class="collection-item avatar" onclick="Materialize.toast('Added to cart', 1500)">
-        <li>
-          <img src="../public/images/sandwich-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Sandwich</span>
-          <p>Roast Beef Sandwich on rye <br> $6
-          </p>
-        </li>
-      </a>
-      <a href="#!" class="collection-item avatar" onclick="Materialize.toast('Added to cart', 1500)">
-        <li>
-          <img src="../public/images/hamburger-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Burger</span>
-          <p>Beef burger with all the fixings <br> $10
-          </p>
-        </li>
-      </a>
-      <a href="#!" class="collection-item avatar" onclick="Materialize.toast('Added to cart', 1500)">
-        <li>
-          <img src="../public/images/coffee-cup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Coffee</span>
-          <p>Fresh, made to order <br> $4.50
-          </p>
-        </li>
-      </a>
-      <a id="menuToRest" href="#!" class="collection-item">
-        <li>
-          <span class="title">Back to Restaurants</span>
-        </li>
-      </a>
+        <h6>Restaurant ID#</h6>
+        <h6></h6></li>
+      <li class="collection-item ">
+        <span class="title">Average Transatcion Value</span>
+        <p>$79.60</p>
+      </li>
+      <li class="collection-item ">
+        <span class="title">Best Selling Items</span>
+        <p>First: itemID Cnt: 15<br> Second: itemID Cnt: 9 <br> Third: itemID Cnt: 15
+        </p>
+      </li>
+      <li class="collection-item ">
+        <span class="title">Total Sales</span>
+        <p>Sales by day: $6,519<br>
+          Sales by month: $61,895<br>
+          Sales by year: $589,652
+        </p>
+      </li>
     </ul>
   </div>
 
 
 
-</body>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src='../public/scripts/app.js' charset='utf-8'></script>
+  <script src="js/init.js"></script>
+</body>
+
 </html>

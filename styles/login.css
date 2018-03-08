@@ -1,0 +1,25 @@
+body {
+	background: #f5f5f5;
+}
+
+h5 {
+	font-weight: 400;
+}
+
+.loginreg{
+    margin-right: 5em;
+}
+.tabs .indicator {
+	background-color: #e0f2f1;
+	height: 100%;
+	opacity: 0.3;
+}
+
+.form-container {
+	padding: 40px;
+	padding-top: 10px;
+}
+
+.confirmation-tabs-btn {
+	position: relative;
+}
