@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS food CASCADE
 
 CREATE TABLE customer {
   id SERIAL PRIMARY KEY,
+  username TEXT NOT NULL,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   phone_number VARCHAR(24) NOT NULL,
@@ -19,7 +20,10 @@ CREATE TABLE restaurant {
   name VARCHAR(50) NOT NULL,
   phone_number VARCHAR(24) NOT NULL,
   address VARCHAR(100) NOT NULL,
-  email VARCHAR(50)
+  country,
+  province
+  email VARCHAR(50),
+  menu_id INT REFERENCES menu(id)
 };
 
 CREATE TABLE order {
@@ -30,6 +34,7 @@ CREATE TABLE order {
 
 CREATE TABLE owner {
   id SERIAL PRIMARY KEY,
+  username TEXT NOT NULL,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   phone_number VARCHAR(24) NOT NULL,
@@ -48,4 +53,11 @@ CREATE TABLE food {
   name TEXT NOT NULL,
   price INT NOT NULL,
   cook_time INT NOT NULL
-}
+};
+
+CREATE TABLE tax {
+  id SERIAL PRIMARY KEY,
+  country,
+  province,
+  tax INT
+};
