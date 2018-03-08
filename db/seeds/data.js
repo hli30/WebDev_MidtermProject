@@ -1,38 +1,22 @@
 exports.seed = function(knex, Promise) {
   return deleteTables(knex)
-    .then(() => {
-      return seedContact(knex)
-    })
-    .then(() => {
-      return seedFood(knex)
-    })
-    .then(() => {
-      return seedMenu(knex)
-    })
-    .then(() => {
-      return seedRestaurant(knex)
-    })
-    .then(() => {
-      return seedOwner(knex)
-    })
-    .then(() => {
-      return seedCustomer(knex)
-    })
+    .then(() => seedContact(knex))
+    .then(() => seedFood(knex))
+    .then(() => seedMenu(knex))
+    .then(() => seedCustomer(knex))
+    .then(() => seedRestaurant(knex))
+    .then(() => seedOwner(knex))
 };
 
 const deleteTables = (knex) => {
-  return knex("order").del()
-    .then(() => {
-      knex("customer").del()
-      .then(() => {
-        knex("owner").del()
-      })
-    })
-    // knex("restaurant").del(),
-    // knex("menu").del(),
-    // knex("food").del(),
-    // knex("contact").del(),
-}
+  return Promise.resolve(knex("order").del())
+    .then(() => knex("owner").del())
+    .then(() => knex("restaurant").del())
+    .then(() => knex("menu").del())
+    .then(() => knex("customer").del())
+    .then(() => knex("food").del())
+    .then(() => knex("contact").del())
+};
 
 const seedContact = (knex) => {
   knex("contact")
