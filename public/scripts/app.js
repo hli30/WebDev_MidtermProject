@@ -1,6 +1,5 @@
    $('.loginreg').hide();
    $('.shopping-cart').hide();
-
 $(document).ready(function() {
 
   $("#loginregbtn").click(function() {
@@ -15,7 +14,26 @@ $(document).ready(function() {
        $('.loginreg').hide();
     }
     $(".shopping-cart").fadeToggle();
+
+
+
+
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 })
