@@ -1,8 +1,8 @@
    $('.loginreg').hide();
    $('.shopping-cart').hide();
    $('#menu').hide();
+
 $(document).ready(function() {
-  const Cart = require('cart-js');
   // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
@@ -28,6 +28,12 @@ $(document).ready(function() {
      $("#menu").hide();
      $('#restList.container').show();
     })
+
+    $(".restaurantClick").on("click", function() {
+      console.log('it clicks')
+      $('#restaurantByID').fadeToggle();
+    });
+
     //loads the menu data
     const loadMenu = function() {
       $.get("/restaurant/food", renderMenu);
@@ -55,8 +61,7 @@ $(document).ready(function() {
 
 
 
-    let cart = new Cart();
-    
+
 
 
 
