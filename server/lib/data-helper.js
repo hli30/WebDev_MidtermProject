@@ -5,8 +5,7 @@ module.exports = function makeDataHelpers(knex) {
     getFoods: (id) => knex("food").where("restaurant_id", id).limit(10),
 
     //POSTs
-    saveOrder: () => {
-      
-    }
+    addToCheckout: (data) => knex("checkout").insert({data}),
+    saveOrder: (data) => knex("order").insert({data})
   }
 }
