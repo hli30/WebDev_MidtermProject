@@ -5,9 +5,8 @@ module.exports = function makeDataHelpers(knex) {
       knex.select("*")
         .from("restaurant")
         .limit(10)
-        //array of rows, which r objs of colums?
+        .then((rows) => callback(null, rows))
+        .catch((err) => console.log(error.message))
     }
   }
-
-
 }
