@@ -24,12 +24,6 @@ app.use(knexLogger(knex));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use("/styles", sass({
-//   src: __dirname + "/styles",
-//   dest: __dirname + "/public/styles",
-//   debug: true,
-//   outputStyle: 'expanded'
-// }));
 app.use(express.static("public"));
 
 const DataHelpers = require("./server/lib/data-helper")(knex);
@@ -37,12 +31,6 @@ const mainRoutes = require("./server/routes/main")(DataHelpers);
 
 // Mount all resource routes
 app.use("/restaurant", mainRoutes);
-
-// Home page
-app.get("/", (req, res) => {
-  //need to res json restaurant
-  res.render("index");
-});
 
 //post ("/restaurant/:id")
   //pass res json foods
