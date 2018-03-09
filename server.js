@@ -32,9 +32,6 @@ const mainRoutes = require("./server/routes/main")(DataHelpers);
 // Mount all resource routes
 app.use("/restaurant", mainRoutes);
 
-//post ("/restaurant/:id")
-  //pass res json foods
-
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
