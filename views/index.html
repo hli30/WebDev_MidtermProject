@@ -158,6 +158,7 @@
         <li class="collection-header">
           <h4>Restaurants</h4>
         </li>
+        {{#each}}
           <a  href="#!" class="collection-item avatar showRestaurantMenu">
         <li>
           <img src="../public/images/basic-restaurant-sign-svgrepo-com.svg" class="circle">
@@ -168,7 +169,6 @@
       </ul>
   </div>
 
-
   <div id='menu' class="container z-depth-2 ">
       <ul class="collection with-header">
         <li class="collection-header">
@@ -176,6 +176,7 @@
           <h6>{{restaurant.contact.phone}}</h6>
           <h6>{{restaurant.contact.address}}</h6>
         </li>
+        {{#each}}
         <a id="{{restaurant.menu.food.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
           <li>
             <img src={{restaurant.menu.food.picture}} alt=""  class="circle">
