@@ -10,9 +10,18 @@ module.exports = function (DataHelpers) {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        console.log("raw rows: ", restaurants);
-
         res.json({restaurants: restaurants});
+      }
+    })
+  });
+
+  router.get("/:id", (req, res) => {
+    let id = req.params.id;
+    DataHelpers.getFoods(id, (err, foods) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json({menu: foods});
       }
     })
   });
