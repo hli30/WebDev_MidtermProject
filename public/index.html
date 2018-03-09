@@ -159,24 +159,26 @@
         <li class="collection-header">
           <h4>Restaurants</h4>
         </li>
-        {{#each}}
-          <a  href="#!" class="collection-item avatar showRestaurantMenu">
+        {{#each restaurants}}
+          <a  href="#!" class="collection-item  showRestaurantMenu">
         <div>
-          <img src="../public/images/basic-restaurant-sign-svgrepo-com.svg" class="circle">
-          <span class="title">{{restaurant.name}}</span>
-          <p>{{restaurant.description}}<br> {{restaurant.contact.address}} & {{restaurant.contact.phone}}</p>
+          <span class="title">{{this.name}}
+        </span>
+          <p>{{this.description}}<br> {{this.address}} & {{this.phone_number}}</p>
         </div>
       </a>
+      {{/each}}
       </ul>
     </script>
   </div>
 
   <div id='menu' class="container z-depth-2 ">
+    <script id="menuTemplate" type="text/x-handlebars-template">
       <ul class="collection with-header">
         <li class="collection-header">
-          <h4>{{restaurant.name}}</h4>
-          <h6>{{restaurant.contact.phone}}</h6>
-          <h6>{{restaurant.contact.address}}</h6>
+          <h4>{{restaurants.name}}</h4>
+          <h6>{{restaurants.phone_number}}</h6>
+          <h6>{{restaurants.address}}</h6>
         </li>
         {{#each}}
         <a id="{{restaurant.menu.food.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
@@ -192,8 +194,8 @@
             <span class="title">Back to Restaurants</span>
           </li>
         </a>
-
       </ul>
+    </script>
   </div>
 
 </body>

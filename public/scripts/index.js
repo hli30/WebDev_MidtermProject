@@ -51,12 +51,12 @@ $(document).ready(function() {
       $("#body").html(html);
     }
     //renders the restaurant data with handlebars
-    const renderRestaurants= function(data) {
+    const renderRestaurants= function(restaurants) {
       var source= $("#restaurantTemplate").html()
 
       var template = Handlebars.compile(source);
-      var html = template(data);
-      $("#body").html(html);
+      var templateHtml = template(restaurants);
+      $("#restlist").html(templateHtml);
     }
       //calls the load restaurant lists
       loadRestaurants()
