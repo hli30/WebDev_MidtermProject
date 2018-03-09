@@ -1,27 +1,26 @@
 exports.seed = function(knex, Promise) {
   return deleteTables(knex)
-    .then(() => seedContact(knex))
-    .then(() => seedFood(knex))
-    .then(() => seedMenu(knex))
-    .then(() => seedCustomer(knex))
-    .then(() => seedRestaurant(knex))
-    .then(() => seedOwner(knex))
+    .then(() => seedUser(knex))
+    .then((user_ids) => seedRestaurant(knex, user_ids))
+    .then((user_restaurant_ids) => seedOrder(knex, user_restaurant_ids))
+    .then((restaurant_ids) => seedFood(knex, restaurant_ids))
 };
 
 const deleteTables = (knex) => {
   return Promise.resolve(knex("order").del())
-    .then(() => knex("owner").del())
-    .then(() => knex("restaurant").del())
-    .then(() => knex("menu").del())
-    .then(() => knex("customer").del())
     .then(() => knex("food").del())
-    .then(() => knex("contact").del())
+    .then(() => knex("restaurant").del())
+    .then(() => knex("user").del())
 };
 
-const seedContact = (knex) => {
-  knex("contact")
+const seedUser = (knex) => {
+  return knex("user")
     .returning("id")
-    .insert([{
+    .insert([
+      {
+        role: "customer",
+        username: "testCus",
+        password: "hashedpw",
         first_name: "John", 
         last_name: "Smith", 
         phone_number: "1234567890",
@@ -32,6 +31,9 @@ const seedContact = (knex) => {
         email: "hi@hi.com"
       },
       {
+        role: "owner",
+        username: "testOwn",
+        password: "hashedpw2",
         first_name: "Jane", 
         last_name: "Doe", 
         phone_number: "1234567890",
@@ -42,41 +44,10 @@ const seedContact = (knex) => {
         email: "hi@hi.com"
       }
     ])
-    .then((id) => {
-      return Promise.all([
-        knex("customer").insert({
-          contact_id: id[0]
-        }),
-        knex("owner").insert({
-          contact_id: id[1]
-        })
-      ])
-    })
 }
 
-const seedCustomer = (knex) => {
-  knex("customer")
-    .returning("id")
-    .insert({
-      username: "testUser",
-      password: "hashedpw"  
-    })
-    .then((id) => {
-      return knex("order").insert({
-        customer_id: id[0]
-      })
-    })
-}
-
-const seedOwner = (knex) => {
-  knex("owner").insert({
-    username: "testOwner",
-    password: "hashedpw2"  
-  })
-}
-
-const seedRestaurant = (knex) => {
-  knex("restaurant")
+const seedRestaurant = (knex, user_ids) => {
+  return knex("restaurant")
     .returning("id")
     .insert({
       name: "SomePlace",
@@ -84,46 +55,32 @@ const seedRestaurant = (knex) => {
       type: "comfort",
       phone_number: "1234567890",
       address: "321 street",
-      email: "test@test.com"
+      email: "test@test.com",
+      user_id: user_ids[1]
     })
-    .then((id) => {
-      return Promise.all([
-        knex("order").insert({
-          restaurant_id: id[0]
-        }),
-        knex("owner").insert({
-          restaurant_id: id[0]
-        })
-      ]);
-    });
-}
-
-// const seedOrder = (knex) => {
-
-// }
-
-const seedMenu = (knex) => {
-  knex("menu")
-    .returning("id")
-    .then((id) => {
-      return knex("restaurant").insert({
-        menu_id: id[0]
-      })
+    .then((restaurant_ids) => {
+      return [user_ids, restaurant_ids];
     })
 }
 
-const seedFood = (knex) => {
+const seedOrder = (knex, user_restaurant_ids) => {
+  return knex("order")
+    .insert({
+      user_id: user_restaurant_ids[0][0],
+      restaurant_id: user_restaurant_ids[1][0]
+    })
+    .then(() => {
+      return user_restaurant_ids[1];
+    })
+}
+
+const seedFood = (knex, restaurant_ids) => {
   return knex("food")
-    .returning("id")
     .insert({
       name: "apple",
       type: "app",
       price: 12.5,
-      cook_time_in_minutes: 5
-    })
-    .then((id) => {
-      return knex("menu").insert({
-        food_id: id[0]
-      })
+      cook_time_in_minutes: 5,
+      restaurant_id: restaurant_ids[0]
     })
 }

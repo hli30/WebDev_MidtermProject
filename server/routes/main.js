@@ -3,20 +3,19 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (knex) => {
+module.exports = function (DataHelpers) {
 
   router.get("/", (req, res) => {
-    knex
-      .select("*")
-      .from("users")
-      .then((results) => {
-        res.json(results);
-    });
-
-    
+    DataHelpers.getRestaurants((err, restaurants) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        console.log("raw rows: ", restaurants);
+        console.log("json:", res.json(restaurants));
+        res.json(restaurants);
+      }
+    })
   });
-
-  
 
   return router;
 }
