@@ -6,13 +6,13 @@
   <!--Import materialize.css-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
   <!-- layout CSS -->
-  <link rel="stylesheet" href="../styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="../public/styles/layout.css" type="text/css" />
   <!-- login CSS -->
-  <link rel="stylesheet" href="../styles/login.css" type="text/css" />
+  <link rel="stylesheet" href="../public/styles/login.css" type="text/css" />
   <!-- navbar CSS -->
-  <link rel="stylesheet" href="../styles/navbar.css" type="text/css" />
+  <link rel="stylesheet" href="../public/styles/navbar.css" type="text/css" />
   <!-- cart CSS -->
-  <link rel="stylesheet" href="../styles/cart.css" type="text/css" />
+  <link rel="stylesheet" href="../public/styles/cart.css" type="text/css" />
 
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -33,8 +33,6 @@
       </div>
     </nav>
   </div>
-
-
 </header>
 
  <body>
@@ -156,35 +154,33 @@
 
   <!-- Restaurant List -->
   <div id="restlist" class="container z-depth-2">
-    <script id="restTemplate" type="text/x-handlebars-template">
       <ul class="collection with-header">
         <li class="collection-header">
-          <h4>Restaurants near you</h4></li>
+          <h4>Restaurants</h4>
+        </li>
           <a  href="#!" class="collection-item avatar showRestaurantMenu">
-            {{#each restaurant}}
         <li>
           <img src="../public/images/basic-restaurant-sign-svgrepo-com.svg" class="circle">
           <span class="title">{{restaurant.name}}</span>
           <p>{{restaurant.description}}<br> {{restaurant.contact.address}} & {{restaurant.contact.phone}}</p>
         </li>
+      </a>
       </ul>
-    </script>
   </div>
 
-  <!-- MENU ITEMS -->
+
   <div id='menu' class="container z-depth-2 ">
-    <script id="menuTemplate" type="text/x-handlebars-template">
       <ul class="collection with-header">
-        {{#each restaurant.menu.foodID}}
         <li class="collection-header">
           <h4>{{restaurant.name}}</h4>
           <h6>{{restaurant.contact.phone}}</h6>
-          <h6>{{restaurant.contact.address}}</h6></li>
-        <a href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
+          <h6>{{restaurant.contact.address}}</h6>
+        </li>
+        <a id="{{restaurant.menu.food.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
           <li>
             <img src={{restaurant.menu.food.picture}} alt=""  class="circle">
-            <span class="title">{{restaurant.menu.food.name}}</span>
-            <p>{{restaurant.menu.food.description}}<br> {{restaurant.menu.food.price}}
+            <span class="title"><h5>{{restaurant.food.name}}</h5></span>
+            <p>{{restaurant.food.description}}<br> {{restaurant.food.price}}
             </p>
           </li>
         </a>
@@ -193,15 +189,13 @@
             <span class="title">Back to Restaurants</span>
           </li>
         </a>
+
       </ul>
-    </script>
   </div>
-
-
 
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script src='../public/scripts/app.js' charset='utf-8'></script>
+  <script src='../public/scripts/main.js' charset='utf-8'></script>
 </html>
