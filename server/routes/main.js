@@ -10,9 +10,9 @@ module.exports = function (DataHelpers) {
       if (err) {
         res.status(500).json({ error: err.message });
       } else {
-        console.log("raw rows: ", restaurants);
+        console.log("raw rows: ", restaurants.rows);
         console.log("json:", res.json(restaurants));
-        res.json(restaurants);
+        res.json(restaurants.rows);
       }
     })
   });

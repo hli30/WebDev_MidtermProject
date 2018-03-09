@@ -40,7 +40,7 @@ $(document).ready(function() {
     };
     //loads the restaurant data
     const loadRestaurants= function() {
-      $.get("/restaurants", renderRestaurants);
+      $.get("/restaurant", renderRestaurants);
     };
     //renders the menu data with handlebars
     const renderMenu= function(data) {
@@ -52,29 +52,12 @@ $(document).ready(function() {
     }
     //renders the restaurant data with handlebars
     const renderRestaurants= function(data) {
-      var source= $("#restTemplate").html()
+      var source= $("#restaurantTemplate").html()
 
       var template = Handlebars.compile(source);
       var html = template(data);
       $("#body").html(html);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       //calls the load restaurant lists
       loadRestaurants()
 })

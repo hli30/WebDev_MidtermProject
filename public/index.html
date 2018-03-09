@@ -6,13 +6,13 @@
   <!--Import materialize.css-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
   <!-- layout CSS -->
-  <link rel="stylesheet" href="../public/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <!-- login CSS -->
-  <link rel="stylesheet" href="../public/styles/login.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
   <!-- navbar CSS -->
-  <link rel="stylesheet" href="../public/styles/navbar.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
   <!-- cart CSS -->
-  <link rel="stylesheet" href="../public/styles/cart.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/cart.css" type="text/css" />
 
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -154,19 +154,21 @@
 
   <!-- Restaurant List -->
   <div id="restlist" class="container z-depth-2">
+    <script id="restaurantTemplate" type="text/x-handlebars-template">
       <ul class="collection with-header">
         <li class="collection-header">
           <h4>Restaurants</h4>
         </li>
         {{#each}}
           <a  href="#!" class="collection-item avatar showRestaurantMenu">
-        <li>
+        <div>
           <img src="../public/images/basic-restaurant-sign-svgrepo-com.svg" class="circle">
           <span class="title">{{restaurant.name}}</span>
           <p>{{restaurant.description}}<br> {{restaurant.contact.address}} & {{restaurant.contact.phone}}</p>
-        </li>
+        </div>
       </a>
       </ul>
+    </script>
   </div>
 
   <div id='menu' class="container z-depth-2 ">
@@ -196,7 +198,9 @@
 
 </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script src='../public/scripts/main.js' charset='utf-8'></script>
+  <script src='/scripts/index.js' charset='utf-8'></script>
 </html>
