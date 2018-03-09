@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -35,7 +34,7 @@
   </div>
 </header>
 
- <body>
+<body>
 
   <!-- LOGIN & REGISTER -->
   <div class="loginreg container white z-depth-2 right">
@@ -160,32 +159,33 @@
           <h4>Restaurants</h4>
         </li>
         {{#each restaurants}}
-          <a  href="#!" class="collection-item  showRestaurantMenu">
-        <div>
-          <span class="title">{{this.name}}
-        </span>
-          <p>{{this.description}}<br> {{this.address}} & {{this.phone_number}}</p>
-        </div>
-      </a>
-      {{/each}}
+        <li>
+          <a data-restaurant-id="{{this.id}}" class="collection-item showRestaurantMenu" >
+            <div>
+              <span class="title">{{this.name}}></span>
+              <p>{{this.description}}<br> {{this.address}} &amp; {{this.phone_number}}</p>
+            </div>
+          </a>
+        </li>
+        {{/each}}
       </ul>
     </script>
   </div>
 
   <div id='menu' class="container z-depth-2 ">
     <script id="menuTemplate" type="text/x-handlebars-template">
+      {{#each menu}}
       <ul class="collection with-header">
         <li class="collection-header">
           <h4>{{restaurants.name}}</h4>
-          <h6>{{restaurants.phone_number}}</h6>
+          <h6>{{restaurants.phone_number}}</h6>a
           <h6>{{restaurants.address}}</h6>
         </li>
-        {{#each}}
-        <a id="{{restaurant.menu.food.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
+        <a id="{{this.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
           <li>
-            <img src={{restaurant.menu.food.picture}} alt=""  class="circle">
-            <span class="title"><h5>{{restaurant.food.name}}</h5></span>
-            <p>{{restaurant.food.description}}<br> {{restaurant.food.price}}
+            <img src={{restaurant.menu.food.picture}} alt="" class="circle">
+            <span class="title"><h5>{{this.name}}</h5></span>
+            <p>{{this.type}}<br> {{this.price}}
             </p>
           </li>
         </a>
@@ -195,14 +195,16 @@
           </li>
         </a>
       </ul>
+      {{/each}}
     </script>
   </div>
 
 </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script src='/scripts/index.js' charset='utf-8'></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src='/scripts/index.js' charset='utf-8'></script>
+
 </html>
