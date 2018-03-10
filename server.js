@@ -27,10 +27,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const DataHelpers = require("./server/lib/data-helper")(knex);
-const mainRoutes = require("./server/routes/main")(DataHelpers);
+// require("./server/twilio/controller")(DataHelpers);
+const restaurantRoutes = require("./server/routes/restaurant")(DataHelpers);
+// const userRoutes = require("./server/routes/user")(DataHelpers);
+const checkoutRoutes = require("./server/routes/checkout")(DataHelpers);
 
 // Mount all resource routes
-app.use("/restaurant", mainRoutes);
+app.use("/restaurant", restaurantRoutes);
+app.use("/checkout", checkoutRoutes);
+// app.use("/user", userRoutes);
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
