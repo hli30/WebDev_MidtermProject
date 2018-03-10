@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,11 +12,9 @@
   <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
   <!-- cart CSS -->
   <link rel="stylesheet" href="/styles/cart.css" type="text/css" />
-
-
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Foodify</title>
+  <title>Neglect the plates</title>
 
 </head>
 
@@ -25,7 +22,7 @@
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper teal">
-        <a href="#" class="brand-logo center">Foodify</a>
+        <a href="#" class="brand-logo center">Neglect the plates</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
           <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="badge new red">3</span></a></li>
@@ -35,7 +32,7 @@
   </div>
 </header>
 
- <body>
+<body>
 
   <!-- LOGIN & REGISTER -->
   <div class="loginreg container white z-depth-2 right">
@@ -49,19 +46,19 @@
           <h3 class="teal-text">Hello</h3>
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
+              <input id="email-log" type="email" class="validate">
+              <label for="email-log">Email</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate ">
-              <label for="password">Password</label>
+              <input id="password-log" type="password" class="validate ">
+              <label for="password-log">Password</label>
             </div>
           </div>
           <br>
           <center>
-            <button class="btn waves-effect waves-light teal" type="submit" name="action">Connect</button>
+            <button class="btn waves-effect waves-light teal" type="submit" action="/login" name="action">Connect</button>
             <br>
             <br>
           </center>
@@ -74,18 +71,18 @@
           <h3 class="teal-text">Welcome</h3>
           <div class="row">
             <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">First Name</label>
+              <input id="first-name" type="text" class="validate">
+              <label for="first-name">First Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
+              <input id="last-name" type="text" class="validate">
+              <label for="last-name">Last Name</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
+              <input id="email-reg" type="email" class="validate">
+              <label for="email-reg">Email</label>
             </div>
           </div>
           <div class="row">
@@ -96,8 +93,8 @@
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
+              <input id="password-reg" type="password" class="validate">
+              <label for="password-reg">Password</label>
             </div>
           </div>
           <div class="row">
@@ -121,88 +118,109 @@
         <i class="material-icons left">shopping_cart</i></i><span class="badge">3</span>
         <div class="shopping-cart-total">
           <span class="lighter-text">Total:</span>
-          <span class="main-color-text">$15.50 taxes incl</span>
+          <span class="main-color-text">$15.50 </span>
         </div>
       </div>
       <!--end shopping-cart-header -->
-
-      <ul class="collection">
-        <li class="collection-item avatar">
-          <img src="../public/images/sandwich-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Sandwich</span>
-          <p>$6.00</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-        <li class="collection-item avatar">
-          <img src="../public/images/soup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Soup</span>
-          <p>$5.00</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-        <li class="collection-item avatar">
-          <img src="../public/images/coffee-cup-svgrepo-com.svg" alt="" class="circle">
-          <span class="title">Coffee</span>
-          <p>$4.50</p>
-          <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
-        </li>
-      </ul>
-      <a href="#" class="waves-effect waves-light btn">Checkout</a>
-    </div>
+      <div id='CartBody'>
+      </div>
     <!--end shopping-cart -->
   </div>
+</div>
   <!--end container -->
 
-  <!-- Restaurant List -->
+  <!-- Restaurants  -->
   <div id="restlist" class="container z-depth-2">
-    <script id="restaurantTemplate" type="text/x-handlebars-template">
-      <ul class="collection with-header">
-        <li class="collection-header">
-          <h4>Restaurants</h4>
-        </li>
-        {{#each restaurants}}
-          <a  href="#!" class="collection-item  showRestaurantMenu">
-        <div>
-          <span class="title">{{this.name}}
-        </span>
-          <p>{{this.description}}<br> {{this.address}} & {{this.phone_number}}</p>
-        </div>
-      </a>
-      {{/each}}
-      </ul>
-    </script>
   </div>
 
+  <!-- Menu  -->
   <div id='menu' class="container z-depth-2 ">
-    <script id="menuTemplate" type="text/x-handlebars-template">
-      <ul class="collection with-header">
-        <li class="collection-header">
-          <h4>{{restaurants.name}}</h4>
-          <h6>{{restaurants.phone_number}}</h6>
-          <h6>{{restaurants.address}}</h6>
-        </li>
-        {{#each}}
-        <a id="{{restaurant.menu.food.id}}" href="#!" class="collection-item " onclick="Materialize.toast('Added to cart', 1500)">
-          <li>
-            <img src={{restaurant.menu.food.picture}} alt=""  class="circle">
-            <span class="title"><h5>{{restaurant.food.name}}</h5></span>
-            <p>{{restaurant.food.description}}<br> {{restaurant.food.price}}
+  </div>
+
+  <div id='order' class="container z-depth-2 ">
+  </div>
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<!-- Restaurant Template -->
+  <script id="restaurantTemplate" type="text/x-handlebars-template">
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <h4>Restaurants</h4>
+      </li>
+      {{#each restaurants}}
+      <li>
+        <a data-restaurant-id="{{this.id}}"  method="GET" action="/:{{this.id}}" class="collection-item showRestaurantMenu" type="submit" >
+          <div>
+            <span class="title">{{this.name}}</span>
+            <p>{{this.description}}<br>
+               {{this.address}} &amp; {{this.phone_number}}</p>
+          </div>
+        </a>
+      </li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <!-- Main template for menu -->
+  <script id="menuTemplate" type="text/x-handlebars-template">
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <h4>Restaurant Name</h4>
+        <h6>Phone Number</h6>
+        <h6>Address</h6>
+      </li>
+      {{#each menu}}
+        <a id="{{this.id}}" href="#!" class="collection-item foodthing" data-foodid="{{this.id}}" onclick="Materialize.toast('Added to cart', 1500)">
+          <li id="listID">
+            <span class="title"><h5>{{this.name}}</h5></span>
+            <p data-foodid="{{this.id}}">{{this.type}}<br> {{this.price}}
             </p>
           </li>
         </a>
-        <a id="menuToRest" href="#!" class="collection-item">
-          <li>
-            <span class="title">Back to Restaurants</span>
-          </li>
-        </a>
-      </ul>
-    </script>
-  </div>
-
-</body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+      {{/each}}
+      <a id="menuToRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
+        <span class="title">Back to Restaurants</span>
+      </a>
+    </ul>
+  </script>
   <script src='/scripts/index.js' charset='utf-8'></script>
+
+
+  <script id="cartBody" type="text/x-handlebars-template">
+    {{#each food}}
+    <ul class="collection">
+      <li class="collection-item avatar">
+        <span class="title">{{this.name}}</span>
+        <p>{{this.price}}</p>
+        <a href="#!" class="secondary-content"><i class="material-icons ">remove</i></a>
+      </li>
+    </ul>
+    {{/each}}
+    <a id="checkoutBtn" href="#" class="waves-effect waves-light btn">Checkout</a>
+  </script>
+
+  <script id="orderConf" type="text/x-handlebars-template">
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <h4>Thanks for your order</h4>
+        <h6>Restaurant Name</h6>
+        <h6>Order # 123456 </h6>
+        <h6>Total: $25.50</h6>
+      </li>
+      {{#each}}
+      <li class="collection-item">
+        <span class="title">{{this.name}}</span>
+        <p>{{this.price}}</p>
+      </li>
+      {{/each}}
+    </ul>
+</script>
+
 </html>

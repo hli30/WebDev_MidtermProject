@@ -1,63 +1,95 @@
-   $('.loginreg').hide();
-   $('.shopping-cart').hide();
-   $('#menu').hide();
+$('.loginreg').hide();
+$('.shopping-cart').hide();
+$('#menu').hide();
+$('#orderConf').hide();
+$(function() {
 
-$(document).ready(function() {
-  // Makes sure that the cart and login arent displayed at the same time
+
+  var itemsInCart = [];
+// Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
-       $('.shopping-cart').hide();
+      $('.shopping-cart').hide();
     }
     $(".loginreg").fadeToggle();
-  })
+  });
+
+
+  $("#menu").click('.foodthing', function(event) {
+    var foodID = $(event.target).closest('.foodthing').data('foodid');
+    $.post(`/checkout`, foodID);
+  });
 
   $("#cart").on("click", function() {
     if($('.loginreg').is(':visible')){
-       $('.loginreg').hide();
+      $('.loginreg').hide();
     }
     $(".shopping-cart").fadeToggle();
   });
 
   //shows or hides the menu/restaurant list as needed
   $(".showRestaurantMenu").on("click", function() {
-       $('#restList.container').hide();
-       $("#menu").show();
-    })
+    $('#restList.container').hide();
+    $("#menu").show();
+  });
 
-  $("#menuToRest").on("click", function() {
-     $("#menu").hide();
-     $('#restList.container').show();
-    })
+  $("#menu").on("click", '[data-return-toRest]', function() {
+    $('#restList.container').show();
+    $("#menu").hide();
+  });
 
-    $(".restaurantClick").on("click", function() {
-      console.log('it clicks')
-      $('#restaurantByID').fadeToggle();
-    });
+  $('#checkoutBtn').on("click", function(){
+    $('#orderConf').show();
+    $("#menu").hide();
+  });
 
-    //loads the menu data
-    const loadMenu = function() {
-      $.get("/restaurant/food", renderMenu);
-    };
-    //loads the restaurant data
-    const loadRestaurants= function() {
-      $.get("/restaurant", renderRestaurants);
-    };
-    //renders the menu data with handlebars
-    const renderMenu= function(data) {
-      var source= $("#menuTemplate").html()
+  //renders the menu data with handlebars
+  function makeTemplateFnFromId(id){
+    var source = $(id).html();
+    var templateFn = Handlebars.compile(source);
+    return templateFn;
+  }
+  function makePartialWithId(name){
+    const source = $('#' + name).html();
+    Handlebars.registerPartial(name, source);
+  }
 
-      var template = Handlebars.compile(source);
-      var html = template(data);
-      $("#body").html(html);
-    }
-    //renders the restaurant data with handlebars
-    const renderRestaurants= function(restaurants) {
-      var source= $("#restaurantTemplate").html()
+  makePartialWithId('menuTemp');
+  const menuTemplate = makeTemplateFnFromId('#menuTemplate');
+  const cartBody = function(cartData) {
+    itemsInCart + 1;
+    var templateHtml = menuTemplate(cartBody);
+    $("#cartBody").html(templateHtml);
+  };
 
-      var template = Handlebars.compile(source);
-      var templateHtml = template(restaurants);
-      $("#restlist").html(templateHtml);
-    }
-      //calls the load restaurant lists
-      loadRestaurants()
-})
+
+  const renderMenu = function(menuData) {
+    var templateHtml = menuTemplate(menuData);
+    $("#menu").html(templateHtml);
+  };
+
+  //renders menu based on the restaurant click
+  $("#restlist").on("click", '[data-restaurant-id]', function(event) {
+    const restaurantId = $(this).data('restaurantId');
+    $('#restList.container').hide();
+    $("#menu").show();
+    console.log(`/restaurant/${restaurantId}`);
+    $.get(`/restaurant/${restaurantId}`, renderMenu);
+  });
+
+  //renders the restaurant data with handlebars
+  const renderRestaurants = function(restaurants) {
+    var source = $("#restaurantTemplate").html();
+    var template = Handlebars.compile(source);
+    var templateHtml = template(restaurants);
+    $("#restlist").html(templateHtml);
+  };
+
+  //loads the restaurant data
+  const loadRestaurants = function() {
+    $.get("/restaurant", renderRestaurants);
+  };
+
+  //calls the load restaurant lists
+  loadRestaurants();
+});
