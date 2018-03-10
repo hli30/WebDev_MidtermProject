@@ -29,9 +29,11 @@ app.use(express.static("public"));
 const DataHelpers = require("./server/lib/data-helper")(knex);
 const restaurantRoutes = require("./server/routes/restaurant")(DataHelpers);
 // const userRoutes = require("./server/routes/user")(DataHelpers);
+const checkoutRoutes = require("./server/routes/checkout")(DataHelpers);
 
 // Mount all resource routes
 app.use("/restaurant", restaurantRoutes);
+app.use("/checkout", checkoutRoutes);
 // app.use("/user", userRoutes);
 
 app.listen(PORT, () => {

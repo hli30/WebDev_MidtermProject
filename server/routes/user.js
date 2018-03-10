@@ -13,10 +13,10 @@ module.exports = (DataHelper) => {
   })
 
   router.post("/:id/checkout", (req, res) => {
-    let data = JSON.parse(res);
-    DataHelper.addToCheckout(data)
-      .then(() => {
-        
-      })
+    // let data = JSON.parse(res);
+    // DataHelper.saveCheckout(data)
+    //   .then(() => {
+
+    //   })
   })
 }

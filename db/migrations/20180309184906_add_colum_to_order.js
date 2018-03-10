@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table("order", (table) => {
-    table.string("status").notNullable();
+    table.string("status");
   })
   .then(() => {
     return knex.schema.createTable("checkout", (table) => {
