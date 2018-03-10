@@ -17,7 +17,7 @@ $(function() {
 
   $("#menu").click('.foodthing', function(event) {
     var foodID = $(event.target).closest('.foodthing').data('foodid');
-    $.post(`/checkout`, foodID);
+    $.post(`/checkout`, {foodID: foodID});
   });
 
   $("#cart").on("click", function() {

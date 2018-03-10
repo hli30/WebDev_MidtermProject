@@ -6,7 +6,7 @@ module.exports = (knex) => {
     getCheckoutCart: () => knex("checkout").innerJoin("food", "food_id", "id"),
 
     //ADDs
-    saveCheckoutItem: (data) => knex("checkout").insert({data}),
+    saveCheckoutItem: (item) => knex("checkout").insert({data}),
     saveOrder: (data) => knex("order").insert({data}),
 
     //TWILIO

@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const DataHelpers = require("./server/lib/data-helper")(knex);
-require("./server/twilio/controller")(DataHelpers);
+// require("./server/twilio/controller")(DataHelpers);
 const restaurantRoutes = require("./server/routes/restaurant")(DataHelpers);
 // const userRoutes = require("./server/routes/user")(DataHelpers);
 const checkoutRoutes = require("./server/routes/checkout")(DataHelpers);
