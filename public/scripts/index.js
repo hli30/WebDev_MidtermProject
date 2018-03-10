@@ -4,7 +4,6 @@ $('#menu').hide();
 $('#orderConf').hide();
 $(function() {
 
-
   var itemsInCart = {'order': [{"id": 9, "name": "apple", "type": "app", "price": "12.50", "cook_time_in_minutes": 5, "restaurant_id": 4}, {"id": 10, "name": "food2", "type": "main", "price": "1.50", "cook_time_in_minutes": 3, "restaurant_id": 4}, {"id": 11, "name": "meat", "type": "side", "price": "10.00", "cook_time_in_minutes": 10, "restaurant_id": 4}]};
 
   var countOfCart = itemsInCart.order.length;
@@ -15,21 +14,6 @@ $(function() {
       $('.shopping-cart').hide();
     }
     $(".loginreg").fadeToggle();
-  });
-
-  const renderCart = function(itemsInCart) {
-    console.log('made it to render cart');
-    var templateHtml = cartTemplate(itemsInCart);
-    console.log(templateHtml);
-    $("#cartBody").html(templateHtml);
-  };
-
-  $("#menu").on("click", '.foodthing', function(event) {
-    var foodID = $(event.target).closest('.foodthing').data('foodid');
-    var restID = $(event.target).closest('.foodthing').data('restid');
-    renderCart(itemsInCart);
-    // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
-    // $.post(`/checkout`, {foodID: foodID, restID: restID});
   });
 
   $("#cart").on("click", function() {
@@ -49,6 +33,7 @@ $(function() {
     $('#restList.container').show();
     $("#menu").hide();
   });
+
 
   $('#checkoutBtn').on("click", function(){
     $('#orderConf').show();
@@ -72,9 +57,24 @@ $(function() {
 
   const cartTemplate = makeTemplateFnFromId('#cartTemp');
 
+  const renderCart = function(itemsInCart) {
+    console.log('made it to render cart');
+    var templateHtml = cartTemplate(itemsInCart);
+    console.log(templateHtml);
+    $("#cartBody").html(templateHtml);
+  };
 
+  $("#menu").on("click", '.foodthing', function(event) {
+    var foodID = $(event.target).closest('.foodthing').data('foodid');
+    var restID = $(event.target).closest('.foodthing').data('restid');
+    console.log('food id', foodID);
+    console.log('rest id', restID);
+    renderCart(itemsInCart);
+    // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
+    // $.post(`/checkout`, {foodID: foodID, restID: restID});
+  });
 
-
+  //renders menu items
   const renderMenu = function(menuData) {
     var templateHtml = menuTemplate(menuData);
     $("#menu").html(templateHtml);
