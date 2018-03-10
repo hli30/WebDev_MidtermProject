@@ -11,8 +11,6 @@ module.exports = (DataHelpers) => {
     // we get all checkouts from the incoming body data or wherever (JSON ,blah blah)
   })
 
-  
-
   router.get("/", (req, res) => {
     DataHelpers.getRestaurants()
       .then((restaurants) => res.json({restaurants: restaurants}))
