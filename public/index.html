@@ -176,11 +176,15 @@
         <h6>Phone Number</h6>
         <h6>Address</h6>
       </li>
-      <div id='stupidTemp'>
       {{#each menu}}
-        {{> menuTemp}}
+        <a id="{{this.id}}" href="#!" class="collection-item foodthing" data-foodid="{{this.id}}" onclick="Materialize.toast('Added to cart', 1500)">
+          <li id="listID">
+            <span class="title"><h5>{{this.name}}</h5></span>
+            <p data-foodid="{{this.id}}">{{this.type}}<br> {{this.price}}
+            </p>
+          </li>
+        </a>
       {{/each}}
-      </div>
       <a id="menuToRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
         <span class="title">Back to Restaurants</span>
       </a>
@@ -188,16 +192,6 @@
   </script>
   <script src='/scripts/index.js' charset='utf-8'></script>
 
-  <!-- Partial template for menu items -->
-  <script id="menuTemp" type="text/x-handlebars-template">
-    <a id="{{this.id}}" href="#!" class="collection-item " action="/checkout" method="post" onclick="Materialize.toast('Added to cart', 1500)">
-      <li>
-        <span class="title"><h5>{{this.name}}</h5></span>
-        <p>{{this.type}}<br> {{this.price}}
-        </p>
-      </li>
-    </a>
-  </script>
 
   <script id="cartBody" type="text/x-handlebars-template">
     {{#each food}}

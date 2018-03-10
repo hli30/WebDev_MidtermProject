@@ -14,6 +14,12 @@ $(function() {
     $(".loginreg").fadeToggle();
   });
 
+
+  $("#menu").click('.foodthing', function(event) {
+    var foodID = $(event.target).closest('.foodthing').data('foodid');
+    $.post(`/checkout`, foodID);
+  });
+
   $("#cart").on("click", function() {
     if($('.loginreg').is(':visible')){
       $('.loginreg').hide();
