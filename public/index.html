@@ -25,7 +25,8 @@
         <a href="#" class="brand-logo center">Neglect the plates</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
-          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="badge new red">3</span></a></li>
+          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -121,10 +122,8 @@
           <span class="main-color-text">$15.50 </span>
         </div>
       </div>
-      <!--end shopping-cart-header -->
-      <div id='CartBody'>
+      <div id="cartBody">
       </div>
-    <!--end shopping-cart -->
   </div>
 </div>
   <!--end container -->
@@ -140,13 +139,12 @@
   <div id='order' class="container z-depth-2 ">
   </div>
 
-
-
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<script src='/scripts/index.js' charset='utf-8'></script>
 
 <!-- Restaurant Template -->
   <script id="restaurantTemplate" type="text/x-handlebars-template">
@@ -190,11 +188,10 @@
       </a>
     </ul>
   </script>
-  <script src='/scripts/index.js' charset='utf-8'></script>
 
 
-  <script id="cartBody" type="text/x-handlebars-template">
-    {{#each food}}
+  <script id="cartTemp" type="text/x-handlebars-template">
+    {{#each order}}
     <ul class="collection">
       <li class="collection-item avatar">
         <span class="title">{{this.name}}</span>

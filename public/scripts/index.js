@@ -5,8 +5,11 @@ $('#orderConf').hide();
 $(function() {
 
 
-  var itemsInCart = [];
-// Makes sure that the cart and login arent displayed at the same time
+  var itemsInCart = {'order': [{"id": 9, "name": "apple", "type": "app", "price": "12.50", "cook_time_in_minutes": 5, "restaurant_id": 4}, {"id": 10, "name": "food2", "type": "main", "price": "1.50", "cook_time_in_minutes": 3, "restaurant_id": 4}, {"id": 11, "name": "meat", "type": "side", "price": "10.00", "cook_time_in_minutes": 10, "restaurant_id": 4}]};
+
+  var countOfCart = itemsInCart.order.length;
+  console.log(countOfCart);
+  // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
       $('.shopping-cart').hide();
@@ -14,11 +17,19 @@ $(function() {
     $(".loginreg").fadeToggle();
   });
 
+  const renderCart = function(itemsInCart) {
+    console.log('made it to render cart');
+    var templateHtml = cartTemplate(itemsInCart);
+    console.log(templateHtml);
+    $("#cartBody").html(templateHtml);
+  };
 
   $("#menu").on("click", '.foodthing', function(event) {
     var foodID = $(event.target).closest('.foodthing').data('foodid');
     var restID = $(event.target).closest('.foodthing').data('restid');
-    $.post(`/checkout`, {foodID: foodID, restID: restID});
+    renderCart(itemsInCart);
+    // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
+    // $.post(`/checkout`, {foodID: foodID, restID: restID});
   });
 
   $("#cart").on("click", function() {
@@ -50,6 +61,7 @@ $(function() {
     var templateFn = Handlebars.compile(source);
     return templateFn;
   }
+
   function makePartialWithId(name){
     const source = $('#' + name).html();
     Handlebars.registerPartial(name, source);
@@ -57,11 +69,10 @@ $(function() {
 
   makePartialWithId('menuTemp');
   const menuTemplate = makeTemplateFnFromId('#menuTemplate');
-  const cartBody = function(cartData) {
-    itemsInCart + 1;
-    var templateHtml = menuTemplate(cartBody);
-    $("#cartBody").html(templateHtml);
-  };
+
+  const cartTemplate = makeTemplateFnFromId('#cartTemp');
+
+
 
 
   const renderMenu = function(menuData) {
