@@ -1,7 +1,11 @@
 $('.loginreg').hide();
 $('.shopping-cart').hide();
 $('#menu').hide();
+$('#orderConf').hide();
 $(function() {
+
+
+  var itemsInCart = [];
 // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
@@ -24,12 +28,14 @@ $(function() {
   });
 
   $("#menu").on("click", '[data-return-toRest]', function() {
-    // $("#stupidTemp").replaceWith('{{#menu}} {{> menuTemp}} {{/menu}}');
-    console.log('cleared the dom?');
     $('#restList.container').show();
     $("#menu").hide();
   });
 
+  $('#checkoutBtn').on("click", function(){
+    $('#orderConf').show();
+    $("#menu").hide();
+  });
 
   //renders the menu data with handlebars
   function makeTemplateFnFromId(id){
@@ -44,10 +50,15 @@ $(function() {
 
   makePartialWithId('menuTemp');
   const menuTemplate = makeTemplateFnFromId('#menuTemplate');
+  const cartBody = function(cartData) {
+    itemsInCart + 1;
+    var templateHtml = menuTemplate(cartBody);
+    $("#cartBody").html(templateHtml);
+  };
+
 
   const renderMenu = function(menuData) {
     var templateHtml = menuTemplate(menuData);
-    console.log('this is templatehtml for menu', templateHtml);
     $("#menu").html(templateHtml);
   };
 

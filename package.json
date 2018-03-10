@@ -1,13 +1,13 @@
 {
-  "name": "node-skeleton",
+  "name": "skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Project Setup",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server.js",
-    "local": "./node_modules/.bin/nodemon --ignore public/",
-    "knex": "./node_modules/.bin/knex"
+    "local": "nodemon --ignore public/",
+    "knex": "knex"
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
@@ -31,5 +31,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.17.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hli30/WebDev_MidtermProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hli30/WebDev_MidtermProject/issues"
+  },
+  "homepage": "https://github.com/hli30/WebDev_MidtermProject#readme"
 }
