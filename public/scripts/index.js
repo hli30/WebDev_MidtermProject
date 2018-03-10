@@ -15,9 +15,14 @@ $(function() {
   });
 
 
-  $("#menu").click('.foodthing', function(event) {
+  $("#menu").on("click", '.foodthing', function(event) {
     var foodID = $(event.target).closest('.foodthing').data('foodid');
+<<<<<<< HEAD
     $.post(`/checkout`, {foodID: foodID});
+=======
+    var restID = $(event.target).closest('.foodthing').data('restid');
+    $.post(`/checkout`, {foodID: foodID, restID: restID});
+>>>>>>> dev
   });
 
   $("#cart").on("click", function() {

@@ -180,7 +180,7 @@
         <a id="{{this.id}}" href="#!" class="collection-item foodthing" data-foodid="{{this.id}}" onclick="Materialize.toast('Added to cart', 1500)">
           <li id="listID">
             <span class="title"><h5>{{this.name}}</h5></span>
-            <p data-foodid="{{this.id}}">{{this.type}}<br> {{this.price}}
+            <p data-foodid="{{this.id}}" data-restID="{{this.restaurant_id}}">{{this.type}}<br> {{this.price}}
             </p>
           </li>
         </a>
