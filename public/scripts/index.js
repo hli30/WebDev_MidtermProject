@@ -71,7 +71,7 @@ $(function() {
     console.log('rest id', restID);
     renderCart(itemsInCart);
     // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
-    // $.post(`/checkout`, {foodID: foodID, restID: restID});
+    $.post(`/checkout`, {foodID: foodID, restID: restID});
   });
 
   //renders menu items

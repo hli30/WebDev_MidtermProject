@@ -7,23 +7,33 @@ module.exports = (DataHelpers) => {
 
   router.post("/", (req, res) => {
     const food_id = req.body.foodID;
-    // const rest_id = req.body.restID;
-    // const food_id = 4;
-    const rest_id = 1;
-    const user_id = 2;
+    const rest_id = req.body.restID;
 
-    DataHelpers.makeOrder(rest_id, user_id)
-      .then((order_id) => DataHelpers.saveCheckoutItem(food_id, order_id))
-      // .then(() => DataHelpers.getCheckoutCart())
-      // .then((checkoutItems) => res.json({order: checkoutItems}))
-      .catch((err) => {console.log(err.message)})
-  })
+    const user_id = 3;
 
-  router.post("/:food_id/delete", (req, res) => {
-    const food_id = req.params.food_id;
+    // async function returnCheckout() {
+    //   await DataHelpers.makeOrder(rest_id, user_id, food_id);
+    //   DataHelpers.getCheckoutCart();
+    // }
 
-  })
+    DataHelpers.makeOrder(rest_id, user_id, food_id)
+      .then((data) => {
+        return DataHelpers.getCheckoutCart(data);
+      })
+      .then((checkoutFoods) => {
+        // console.log("checkout is:", checkoutFoods);
+        res.json({order: checkoutFoods})
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
     
+  })
 
+  router.post("/delete", (req, res) => {
+    const food_id = req.body.foodID;
+    DataHelpers.removeCheckoutItem(food_id);
+  });
+    
   return router;
 }
