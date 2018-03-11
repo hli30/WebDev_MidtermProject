@@ -103,16 +103,21 @@ $(function() {
 
   //
   $('#checkoutBtn').on("click", function(){
-    $('#navCartBadge').removeClass('new red');
-    $('#navCartBadge').text('');
-    $('#cartCount').text('');
-    $('#cartTotal').text('');
-    $('#restList.container').hide();
-    $("#menu").hide();
-    renderCart({order:[]});
-    $.get('/checkout/submit', renderOrderConf);
-    // clears the cart for the next order if needed.
-    $.get(`/checkout/emptycart`, renderCart);
+    if(cartLength > 0){
+      $('#navCartBadge').removeClass('new red');
+      $('#navCartBadge').text('');
+      $('#cartCount').text('');
+      $('#cartTotal').text('');
+      $('#restList.container').hide();
+      $("#menu").hide();
+      $('.shopping-cart').hide();
+      renderCart({order: []});
+      $.get('/checkout/submit', renderOrderConf);
+      // clears the cart for the next order if needed.
+      $.get(`/checkout/emptycart`, renderCart);
+    } else {
+      Materialize.toast('Add items to your cart first', 1500);
+    }
   });
 
   //when click on menu item it gets the food id and restaurant id from the element and posts it to the server
@@ -148,7 +153,6 @@ $(function() {
     cartTotal = 0;
     $.get(`/checkout/emptycart`, renderCart);
   });
-
 
   //renders the restaurant data with handlebars
   var renderRestaurants = function(restaurants) {
