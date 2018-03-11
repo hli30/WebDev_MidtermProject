@@ -22,18 +22,18 @@ module.exports = (DataHelpers) => {
       })
       .then((checkoutFoods) => {
         // console.log("checkout is:", checkoutFoods);
-        res.json({order: checkoutFoods})
+        res.json({order: checkoutFoods});
       })
       .catch((err) => {
-        console.log(err.message)
-      })
-    
-  })
+        console.log(err.message);
+      });
+
+  });
 
   router.post("/delete", (req, res) => {
     const food_id = req.body.foodID;
     DataHelpers.removeCheckoutItem(food_id);
   });
-    
+
   return router;
-}
+};

@@ -4,19 +4,6 @@ $('#menu').hide();
 $('#orderConf').hide();
 
 $(function() {
-  $('.button-collapse').sideNav({
-    menuWidth: 300,
-    edge: 'right',
-    closeOnClick: true,
-    draggable: true
-    // onOpen: function(el) { // Do Stuff* / }, // A function to be called when sideNav is opened
-    // onClose: function(el) { // Do Stuff* / }, // A function to be called when sideNav is closed
-  }
-  );
-  //hard coded data for
-  var itemsInCart = {'order': [{"id": 9, "name": "apple", "type": "app", "price": "12.50", "cook_time_in_minutes": 5, "restaurant_id": 4}, {"id": 10, "name": "food2", "type": "main", "price": "1.50", "cook_time_in_minutes": 3, "restaurant_id": 4}, {"id": 11, "name": "meat", "type": "side", "price": "10.00", "cook_time_in_minutes": 10, "restaurant_id": 4}]};
-
-
   // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
@@ -42,10 +29,9 @@ $(function() {
     $('#restList.container').show();
     $("#menu").hide();
   });
-  var countOfCart = 0;
+
 
   $("#orderConf").on("click", '[data-return-toRest]', function() {
-    countOfCart = 0;
     $('#restList.container').show();
     $('#orderConf').hide();
     $("#menu").hide();
@@ -53,14 +39,11 @@ $(function() {
   });
 
   $('#checkoutBtn').on("click", function(){
-    if(countOfCart !== 0){
-      $('#orderConf').show();
-      $('#restList.container').hide();
-      $("#menu").hide();
-      countOfCart = 0;
-    } else {
-      Materialize.toast('Add items to your cart first', 1500);
-    }
+
+    $('#orderConf').show();
+    $('#restList.container').hide();
+    $("#menu").hide();
+    Materialize.toast('Add items to your cart first', 1500);
   });
 
   //renders the menu data with handlebars
@@ -77,30 +60,25 @@ $(function() {
 
   makePartialWithId('menuTemp');
   const menuTemplate = makeTemplateFnFromId('#menuTemplate');
-
   const cartTemplate = makeTemplateFnFromId('#cartTemp');
 
   const renderCart = function(itemsInCart) {
+    var countOfCart = itemsInCart.length;
+    console.log(countOfCart);
+    $('#navBadge').text(countOfCart);
+    $('#cartCount').text(countOfCart);
+
     var templateHtml = cartTemplate(itemsInCart);
+    console.log('cart template?', templateHtml);
     $("#cartBody").html(templateHtml);
   };
 
-  $('#cartCount').text(countOfCart);
   //when click on menu item it gets the food id and restaurant id from the element and posts it to the server
   $("#menu").on("click", '.foodthing', function(event) {
     var foodID = $(event.target).closest('.foodthing').data('foodid');
     var restID = $(event.target).closest('.foodthing').data('restid');
-    countOfCart += 1;
-    $('#navBadge').text(countOfCart);
-    $('#cartCount').text(countOfCart);
-    console.log('cart count', countOfCart);
-    renderCart(itemsInCart);
-    // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
     $.post(`/checkout`, {foodID: foodID, restID: restID}, renderCart);
   });
-
-  //$.post(`/checkout/delete/`, {foodID: foodID});
-
 
   //renders menu items
   const renderMenu = function(menuData) {
