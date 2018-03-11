@@ -50,7 +50,7 @@ module.exports = (DataHelpers) => {
     DataHelpers.getCheckoutCart()
       .then((cart) => {
         res.json({order: cart});
-        return DataHelpers.updateAndResetCart();
+        // return DataHelpers.updateAndResetCart();
       });
   });
 
