@@ -28,7 +28,7 @@
       <div class="nav-wrapper teal">
         <ul id="nav-mobile" class="right">
           <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
-          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="new badge  red" id="nav Badge">3</span></a>
+          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="badge" id="navCartBadge"></span></a>
           </li>
         </ul>
       </div>
@@ -121,13 +121,13 @@
       <div class="shopping-cart-header">
         <i class="material-icons left">shopping_cart</i></i><span class="badge" id="cartCount"></span>
         <div class="shopping-cart-total">
-          <span class="lighter-text">Total:</span>
-          <span class="main-color-text" id="cartTotal">$15.50</span>
+          <span class="main-color-text" id="cartTotal"></span>
         </div>
       </div>
       <div id="cartBody">
       </div>
       <a id="checkoutBtn" href="#" class="waves-effect waves-light btn">Checkout</a>
+      <a id="clearCart" type="submit" class="fooditem secondary-content"><i class="material-icons">clear</i></a>
     </div>
   </div>
   <!--end container -->
@@ -144,25 +144,6 @@
   </div>
 
   <div id="orderConf" class="container z-depth-2">
-    <!-- <script id="orderScript" type="text/x-handlebars-template"> -->
-    <ul class="collection with-header">
-      <li class="collection-header">
-        <h4>Thanks for your order</h4>
-        <h6>Restaurant Name</h6>
-        <h6>Order # 123456 </h6>
-        <h6>Total: $25.50</h6>
-      </li>
-      {{#each}}
-      <li class="collection-item">
-        <span class="title">{{this.name}}</span>
-        <p>{{this.price}}</p>
-      </li>
-      {{/each}}
-      <a id="backtoRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
-          <span class="title">Make a new Order</span>
-        </a>
-    </ul>
-    <!-- </script> -->
   </div>
 
 </body>
@@ -215,18 +196,38 @@
   </ul>
 </script>
 
-
+<!-- Shopping cart elements -->
 <script id="cartTemp" type="text/x-handlebars-template">
   {{#each order}}
   <ul class="collection">
-    <li class=" collection-item avatar">
-      <span class="title">{{this.name}}</span>
-      <p>{{this.price}}</p><br/>
-      {{this.quantity}}
-      <a id="removeFromCart" data-cartfoodid="{{this.id}}" type="submit" class="fooditem secondary-content btn-floating btn-large waves-effect waves-light red">  <i class="material-icons ">remove</i></a>
+    <li class=" collection-item ">
+      <a id="removeFromCart" data-cartfoodid="{{this.id}}" type="submit" class="fooditem secondary-content"><i class="material-icons medium ">remove</i></a>
+      <span class="title"><h5>{{this.name}}</h5></span>
+      <p>${{this.price}} <br/> {{this.quantity}}
     </li>
   </ul>
   {{/each}}
+</script>
+
+<!-- Order confrimationtemplate script -->
+<script id="orderTemp" type="text/x-handlebars-template">
+  <ul class="collection with-header">
+    <li class="collection-header">
+      <h4>Thanks for your order</h4>
+      <h6 id="orderCount"></h6>
+      <h6 id="orderTotal"></h6>
+    </li>
+    {{#each order}}
+    <li class="collection-item">
+      <span class="title">{{this.name}}</span>
+      <p>${{this.price}}</p>
+      <p>{{this.quantity}}</p>
+    </li>
+    {{/each}}
+    <a id="backtoRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
+        <span class="title">Make a new Order</span>
+      </a>
+  </ul>
 </script>
 
 </html>
