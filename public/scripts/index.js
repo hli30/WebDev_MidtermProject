@@ -12,6 +12,7 @@ $(function() {
     $(".loginreg").fadeToggle();
   });
 
+  //shows and hides the shopping cart but makes sure that the login isnt visible
   $("#cart").on("click", function() {
     if($('.loginreg').is(':visible')){
       $('.loginreg').hide();
@@ -25,12 +26,13 @@ $(function() {
     $("#menu").show();
   });
 
+  //the button that hides the menu and shows the rest list
   $("#menu").on("click", '[data-return-toRest]', function() {
     $('#restList.container').show();
     $("#menu").hide();
   });
 
-
+  //when done looking at the order confirmation form it hides it and then shows the restaurant list
   $("#orderConf").on("click", '[data-return-toRest]', function() {
     $('#restList.container').show();
     $('#orderConf').hide();
@@ -38,12 +40,12 @@ $(function() {
 
   });
 
-  $('#checkoutBtn').on("click", function(){
 
+  $('#checkoutBtn').on("click", function(){
     $('#orderConf').show();
     $('#restList.container').hide();
     $("#menu").hide();
-    Materialize.toast('Add items to your cart first', 1500);
+    $.post('/checkout/submit')
   });
 
   //renders the menu data with handlebars
@@ -53,23 +55,23 @@ $(function() {
     return templateFn;
   }
 
+
   function makePartialWithId(name){
     const source = $('#' + name).html();
     Handlebars.registerPartial(name, source);
   }
 
+  //function that makes a partial if needed
   makePartialWithId('menuTemp');
   const menuTemplate = makeTemplateFnFromId('#menuTemplate');
   const cartTemplate = makeTemplateFnFromId('#cartTemp');
 
+
   const renderCart = function(itemsInCart) {
     var countOfCart = itemsInCart.length;
-    console.log(countOfCart);
     $('#navBadge').text(countOfCart);
     $('#cartCount').text(countOfCart);
-
     var templateHtml = cartTemplate(itemsInCart);
-    console.log('cart template?', templateHtml);
     $("#cartBody").html(templateHtml);
   };
 
@@ -93,6 +95,14 @@ $(function() {
     $("#menu").show();
     $.get(`/restaurant/${restaurantId}`, renderMenu);
   });
+
+  //renders menu based on the restaurant click
+  $("#shoppingcart").on("click", '.foodItem', function(event) {
+    console.log('made it into the button');
+    var foodID =  $(event.target).closest('.foodItem').data('foodid');
+    $.post(`/checkout/delete`, {foodID: foodID}, renderCart);
+  });
+
 
   //renders the restaurant data with handlebars
   const renderRestaurants = function(restaurants) {

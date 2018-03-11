@@ -35,5 +35,9 @@ module.exports = (DataHelpers) => {
     DataHelpers.removeCheckoutItem(food_id);
   });
 
+  router.get("/emptycart", (req, res) => {
+    DataHelpers.emptyCart()
+  });
+
   return router;
 };
