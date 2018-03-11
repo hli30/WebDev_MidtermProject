@@ -1,4 +1,11 @@
 module.exports = (knex) => {
+
+  const orderData = {
+    food_id: null,
+    rest_id: null,
+    order_id: null
+  }
+
   const saveCheckoutItem = (food_id, order_id) => {
     return knex.select("food_id").from("checkout")
       .where("food_id", food_id)
@@ -37,7 +44,7 @@ module.exports = (knex) => {
       // console.log("inside getcheckout");
       // console.log("data: ", data);
       //SELECT food.* FROM checkout INNER JOIN food ON food.id = checkout.food_id WHERE order_id = order_id;
-      return knex.select("food.*").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", data[1])
+      return knex.select("food.*", "quantity").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", data[1])
         .then((result) => {
           // console.log("in getcart: ",result);
           return result;
@@ -118,21 +125,26 @@ module.exports = (knex) => {
     // },
 
     removeCheckoutItem: (food_id) => {
-    return knex.select("food_id", "quantity").from("checkout")
-      .where("food_id", food_id)
-      .then((result) => {
-        if (result[0].quantity > 1) {
-          return knex("checkout")
-            .where("food_id", food_id)
-            .decrement("quantity", 1)
-            // .then(()=> console.log("record deleted"));
-        } else {
-          return knex("checkout")
-            .where("food_id", food_id)
-            .del()
-            // .then(()=> console.log("row deleted"));
-        }
-      })
+      return knex.select("food_id", "quantity").from("checkout")
+        .where("food_id", food_id)
+        .then((result) => {
+          if (result[0].quantity > 1) {
+            return knex("checkout")
+              .where("food_id", food_id)
+              .decrement("quantity", 1)
+              // .then(()=> console.log("record deleted"));
+          } else {
+            return knex("checkout")
+              .where("food_id", food_id)
+              .del()
+              // .then(()=> console.log("row deleted"));
+          }
+        })
+    },
+
+    //DELETE
+    emptyCart: () => {
+
     }
 
     //TWILIO
