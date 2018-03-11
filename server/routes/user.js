@@ -16,7 +16,6 @@ module.exports = (DataHelper) => {
     // let data = JSON.parse(res);
     // DataHelper.saveCheckout(data)
     //   .then(() => {
-
     //   })
   })
 }

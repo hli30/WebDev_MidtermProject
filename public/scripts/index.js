@@ -40,14 +40,6 @@ $(function() {
 
   });
 
-
-  $('#checkoutBtn').on("click", function(){
-    $('#orderConf').show();
-    $('#restList.container').hide();
-    $("#menu").hide();
-    $.post('/checkout/submit')
-  });
-
   //renders the menu data with handlebars
   function makeTemplateFnFromId(id){
     var source = $(id).html();
@@ -55,22 +47,38 @@ $(function() {
     return templateFn;
   }
 
-
   function makePartialWithId(name){
-    const source = $('#' + name).html();
+    var source = $('#' + name).html();
     Handlebars.registerPartial(name, source);
   }
 
   //function that makes a partial if needed
   makePartialWithId('menuTemp');
-  const menuTemplate = makeTemplateFnFromId('#menuTemplate');
-  const cartTemplate = makeTemplateFnFromId('#cartTemp');
+  var menuTemplate = makeTemplateFnFromId('#menuTemplate');
+  var cartTemplate = makeTemplateFnFromId('#cartTemp');
 
+  var cartLength;
+  var cartTotal;
 
-  const renderCart = function(itemsInCart) {
-    var countOfCart = itemsInCart.length;
-    $('#navBadge').text(countOfCart);
-    $('#cartCount').text(countOfCart);
+  var renderCart = function(itemsInCart) {
+    console.log(itemsInCart);
+    cartTotal = 0;
+    cartLength = 0;
+    itemsInCart.order.forEach(function(item) {
+      cartLength += Number(item.quantity);
+      cartTotal += Number(item.price) * Number(item.quantity);
+    });
+
+    $('#checkoutBtn').on("click", function(){
+      $('#orderConf').show();
+      $('#restList.container').hide();
+      $("#menu").hide();
+      renderCart({order: []});
+      $.get('/checkout/submit');
+    });
+    
+    $('#navBadge').text(cartLength);
+    $('#cartCount').text(cartLength);
     var templateHtml = cartTemplate(itemsInCart);
     $("#cartBody").html(templateHtml);
   };
@@ -83,7 +91,7 @@ $(function() {
   });
 
   //renders menu items
-  const renderMenu = function(menuData) {
+  var renderMenu = function(menuData) {
     var templateHtml = menuTemplate(menuData);
     $("#menu").html(templateHtml);
   };
@@ -105,7 +113,7 @@ $(function() {
 
 
   //renders the restaurant data with handlebars
-  const renderRestaurants = function(restaurants) {
+  var renderRestaurants = function(restaurants) {
     var source = $("#restaurantTemplate").html();
     var template = Handlebars.compile(source);
     var templateHtml = template(restaurants);
@@ -113,7 +121,7 @@ $(function() {
   };
 
   //loads the restaurant data
-  const loadRestaurants = function() {
+  var loadRestaurants = function() {
     $.get("/restaurant", renderRestaurants);
   };
 
