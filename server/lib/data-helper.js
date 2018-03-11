@@ -26,18 +26,29 @@ module.exports = (knex) => {
         }
       });
   }
+  
+  const getCheckoutCart = () => {
+    //SELECT food.* FROM checkout INNER JOIN food ON food.id = checkout.food_id WHERE order_id = order_id;
+    return knex.select("food.*", "quantity").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", orderData.order_id)
+      .then((result) => {
+        console.log(orderData);
+        return result;
+      })
+  }
+
+  const getRestaurantsForOrder = () => knex("restaurant").where("id", orderData.restaurant_id)
 
   return {
     //READs
     getRestaurants: () => knex("restaurant").limit(10),
     getFoods: (id) => knex("food").where("restaurant_id", id).limit(10),
-    getCheckoutCart: () => {
-      //SELECT food.* FROM checkout INNER JOIN food ON food.id = checkout.food_id WHERE order_id = order_id;
-      return knex.select("food.*", "quantity").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", orderData.order_id)
-        .then((result) => {
-          console.log(orderData);
-          return result;
-        })
+    getCheckoutCart: getCheckoutCart,
+    getCheckoutInfo: () => {
+      return Promise.all([
+        getRestaurantsForOrder(),
+        orderData.order_id,
+        getCheckoutCart()
+      ])
     },
 
     //ADDs
