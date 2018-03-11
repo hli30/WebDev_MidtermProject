@@ -89,11 +89,11 @@ const seedRestaurant = (knex, user_ids) => {
 
 const seedOrder = (knex, user_restaurant_ids) => {
   return knex("order")
-    .insert({
-      user_id: user_restaurant_ids[0][0],
-      restaurant_id: user_restaurant_ids[1][0],
-      status: "not ready"
-    })
+    // .insert({
+    //   user_id: user_restaurant_ids[0][0],
+    //   restaurant_id: user_restaurant_ids[1][0],
+    //   status: "not ready"
+    // })
     .then(() => {
       return user_restaurant_ids[1];
     })

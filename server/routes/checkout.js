@@ -11,11 +11,6 @@ module.exports = (DataHelpers) => {
 
     const user_id = 2;
 
-    // async function returnCheckout() {
-    //   await DataHelpers.makeOrder(rest_id, user_id, food_id);
-    //   DataHelpers.getCheckoutCart();
-    // }
-
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then((data) => {
         return DataHelpers.getCheckoutCart(data);
