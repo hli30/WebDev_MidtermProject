@@ -89,7 +89,10 @@ module.exports = (knex) => {
     },
 
     emptyCart: () => {
-      return knex("checkout").where("order_id", orderData.order_id).del();
+      return knex("checkout").where("order_id", orderData.order_id).del()
+        .then(() => {
+          return knex("order").where("id", orderData.order_id).del();
+        })
     },
 
     //RESET
