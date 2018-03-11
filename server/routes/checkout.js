@@ -9,12 +9,7 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
-    const user_id = 2;
-
-    // async function returnCheckout() {
-    //   await DataHelpers.makeOrder(rest_id, user_id, food_id);
-    //   DataHelpers.getCheckoutCart();
-    // }
+    const user_id = 1;
 
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then((data) => {
@@ -31,9 +26,7 @@ module.exports = (DataHelpers) => {
   });
 
   router.post("/delete", (req, res) => {
-    console.log('in the server')
     const food_id = req.body.foodID;
-    console.log(food_id)
     DataHelpers.removeCheckoutItem(food_id)
       .then(() => {
         return DataHelpers.getCheckoutCart()
@@ -54,11 +47,15 @@ module.exports = (DataHelpers) => {
   });
 
   router.get("/submit", (req, res) => {
-    DataHelpers.getCheckoutCart()
-      .then((cart) => {
-        res.json({order: cart})
-      })
-  })
+    DataHelpers.getCheckoutInfo()
+      .then((info) => {
+        res.json({
+          restaurant: info[0],
+          orderID: info[1],
+          order: info[2]
+        })
+      });
+  });
 
   return router;
 };
