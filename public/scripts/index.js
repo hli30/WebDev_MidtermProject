@@ -40,14 +40,6 @@ $(function() {
 
   });
 
-
-  $('#checkoutBtn').on("click", function(){
-    $('#orderConf').show();
-    $('#restList.container').hide();
-    $("#menu").hide();
-    $.post('/checkout/submit');
-  });
-
   //renders the menu data with handlebars
   function makeTemplateFnFromId(id){
     var source = $(id).html();
@@ -72,12 +64,19 @@ $(function() {
     console.log(itemsInCart);
     cartTotal = 0;
     cartLength = 0;
-
     itemsInCart.order.forEach(function(item) {
       cartLength += Number(item.quantity);
       cartTotal += Number(item.price) * Number(item.quantity);
     });
 
+    $('#checkoutBtn').on("click", function(){
+      $('#orderConf').show();
+      $('#restList.container').hide();
+      $("#menu").hide();
+      renderCart({order: []});
+      $.get('/checkout/submit');
+    });
+    
     $('#navBadge').text(cartLength);
     $('#cartCount').text(cartLength);
     var templateHtml = cartTemplate(itemsInCart);
@@ -96,7 +95,7 @@ $(function() {
     var templateHtml = menuTemplate(menuData);
     $("#menu").html(templateHtml);
   };
- 
+
   //renders menu based on the restaurant click
   $("#restlist").on("click", '[data-restaurant-id]', function(event) {
     const restaurantId = $(this).data('restaurantId');
