@@ -11,11 +11,6 @@ module.exports = (DataHelpers) => {
 
     const user_id = 2;
 
-    // async function returnCheckout() {
-    //   await DataHelpers.makeOrder(rest_id, user_id, food_id);
-    //   DataHelpers.getCheckoutCart();
-    // }
-
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then((data) => {
         return DataHelpers.getCheckoutCart(data);
@@ -31,9 +26,7 @@ module.exports = (DataHelpers) => {
   });
 
   router.post("/delete", (req, res) => {
-    console.log('in the server')
     const food_id = req.body.foodID;
-    console.log(food_id)
     DataHelpers.removeCheckoutItem(food_id)
       .then(() => {
         return DataHelpers.getCheckoutCart()
