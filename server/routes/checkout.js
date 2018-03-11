@@ -26,9 +26,7 @@ module.exports = (DataHelpers) => {
   });
 
   router.post("/delete", (req, res) => {
-    console.log('in the server')
     const food_id = req.body.foodID;
-    console.log(food_id)
     DataHelpers.removeCheckoutItem(food_id)
       .then(() => {
         return DataHelpers.getCheckoutCart()
