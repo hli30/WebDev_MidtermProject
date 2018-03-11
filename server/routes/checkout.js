@@ -9,7 +9,7 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
-    const user_id = 3;
+    const user_id = 2;
 
     // async function returnCheckout() {
     //   await DataHelpers.makeOrder(rest_id, user_id, food_id);
@@ -30,13 +30,19 @@ module.exports = (DataHelpers) => {
     
   })
 
-  router.delete("/delete", (req, res) => {
+  router.post("/delete", (req, res) => {
     const food_id = req.body.foodID;
-    DataHelpers.removeCheckoutItem(food_id);
+    DataHelpers.removeCheckoutItem(food_id)
+      .then(() => {
+        return DataHelpers.getCheckoutCart();
+      })
   });
 
   router.get("/emptycart", (req, res) => {
     DataHelpers.emptyCart()
+      .then(() => {
+        return DataHelpers.getCheckoutCart();
+      })
   });
     
   return router;
