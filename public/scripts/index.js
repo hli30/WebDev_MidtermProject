@@ -96,11 +96,11 @@ $(function() {
     $.get(`/restaurant/${restaurantId}`, renderMenu);
   });
 
-  //renders menu based on the restaurant click
-  $("#shoppingcart").on("click", '.foodItem', function(event) {
+  $("#shoppingcart").on("click", '#removeFromCart', function(event) {
     console.log('made it into the button');
-    var foodID =  $(event.target).closest('.foodItem').data('foodid');
-    $.post(`/checkout/delete`, {foodID: foodID}, renderCart);
+    var foodID =  $(event.target).closest('.foodItem').data('cartfoodid');
+    console.log(foodID);
+    $.post(`/checkout/delete/`, {foodID: foodID}, renderCart);
   });
 
 

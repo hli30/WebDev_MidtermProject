@@ -2,7 +2,7 @@ module.exports = (knex) => {
 
   const orderData = {
     food_id: null,
-    rest_id: null,
+    restaurant_id: null,
     order_id: null
   }
 
@@ -44,7 +44,7 @@ module.exports = (knex) => {
       // console.log("inside getcheckout");
       // console.log("data: ", data);
       //SELECT food.* FROM checkout INNER JOIN food ON food.id = checkout.food_id WHERE order_id = order_id;
-      return knex.select("food.*", "quantity").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", data[1])
+      return knex.select("food.*", "quantity").from("checkout").innerJoin("food", "food.id", "checkout.food_id").where("order_id", orderData.order_id)
         .then((result) => {
           // console.log("in getcart: ",result);
           return result;
@@ -84,8 +84,11 @@ module.exports = (knex) => {
                 status: "new"
               })
               .then((id)=> {
-                const order_id = id[0].id;
-                // console.log("record inserted");
+                // const order_id = id[0].id;
+                orderData.order_id = id[0].id;
+                orderData.restaurant_id = id[0].restaurant_id;
+                orderData.user_id = id[0].user_id;
+                console.log("record inserted", id);
                 return saveCheckoutItem(food_id, order_id);
               })
           } else {
@@ -93,7 +96,10 @@ module.exports = (knex) => {
               .returning("id")
               .then((id)=> {
                 const order_id = id[0].id;
-                // console.log("returned id");
+                orderData.order_id = id[0].id;
+                orderData.restaurant_id = id[0].restaurant_id;
+                orderData.user_id = id[0].user_id;
+                console.log("returned id", id);
                 return saveCheckoutItem(food_id, order_id)
                   .then((data) => {
                     // console.log("makeorder's: ", data);
@@ -144,7 +150,7 @@ module.exports = (knex) => {
 
     //DELETE
     emptyCart: () => {
-
+      return knex("checkout").where("order_id", orderData.order_id).del();
     }
 
     //TWILIO

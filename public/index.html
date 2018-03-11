@@ -219,11 +219,11 @@
 <script id="cartTemp" type="text/x-handlebars-template">
   {{#each order}}
   <ul class="collection">
-    <li class="foodItem collection-item avatar">
+    <li class=" collection-item avatar">
       <span class="title">{{this.name}}</span>
       <p>{{this.price}}</p><br/>
       {{this.quantity}}
-      <a id="removeFromCart" data-foodid="{{this.id}}" type="submit" class="secondary-content btn-floating btn-large waves-effect waves-light red">  <i class="material-icons ">remove</i></a>
+      <a id="removeFromCart" data-cartfoodid="{{this.id}}" type="submit" class="fooditem secondary-content btn-floating btn-large waves-effect waves-light red">  <i class="material-icons ">remove</i></a>
     </li>
   </ul>
   {{/each}}
