@@ -17,7 +17,7 @@ module.exports = (DataHelper) => {
 
 client.messages.create({
   body: 'Hello from Node',
-  to: '+17788818291',  // Text this number
+  to: TWILIO_TEST_NUM,  // Text this number
   from: '+15005550006' // From a valid Twilio number
 })
 .then((message) => console.log(message.sid))

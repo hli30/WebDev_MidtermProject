@@ -56,9 +56,10 @@ module.exports = (DataHelpers) => {
   router.get("/submit", (req, res) => {
     DataHelpers.getCheckoutCart()
       .then((cart) => {
-        res.json({order: cart})
-      })
-  })
+        res.json({order: cart});
+        return DataHelpers.updateAndResetCart();
+      });
+  });
 
   return router;
 };

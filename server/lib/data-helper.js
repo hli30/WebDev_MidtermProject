@@ -74,6 +74,7 @@ module.exports = (knex) => {
     makeOrder: (rest_id, user_id, food_id) => {
       return knex.select("*").from("order")
         .where("user_id", user_id)
+        // .andwhere("status", "submitted")
         .then((result) => {
           if (!result) {
             return knex("order")
@@ -151,8 +152,27 @@ module.exports = (knex) => {
     //DELETE
     emptyCart: () => {
       return knex("checkout").where("order_id", orderData.order_id).del();
-    }
+    },
+
+    //RESET
+    updateAndResetCart: () => {
+      knex("order")
+        .where("order_id", orderData.order_id)
+        .update({
+          status: "submitted"
+        })
+        .then(() => {
+          orderData = {
+            food_id: null,
+            restaurant_id: null,
+            order_id: null
+          }
+        });     
+    },
 
     //TWILIO
+    getTwilioMsgData: () => {
+
+    }
   }
 }
