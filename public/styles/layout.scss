@@ -5,3 +5,10 @@ body {
     color: #244751;
   }
 }
+
+
+@media only screen and (min-width: 993px){
+  nav a.button-collapse {
+      display: block;
+  }
+}

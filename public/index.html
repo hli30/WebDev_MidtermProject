@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
   <!-- layout CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <!-- animate -->
+  <link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css“>
   <!-- login CSS -->
   <link rel="stylesheet" href="/styles/login.css" type="text/css" />
   <!-- navbar CSS -->
@@ -19,18 +21,21 @@
 </head>
 
 <header>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper teal">
+
+    <div class="navbar-fixed">
+      <nav class="nav">
         <a href="#" class="brand-logo center">Neglect the plates</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
-          <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+        <div class="nav-wrapper teal">
+          <ul id="nav-mobile" class="right">
+            <li><a id="loginregbtn" class="waves-effect waves-light btn">Login </a></li>
+            <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart</a><span class="badge" id="navBadge"></span>
+            </li>
+          </ul>
+
+        </div>
+      </nav>
+    </div>
+
 </header>
 
 <body>
@@ -116,14 +121,15 @@
   <div id="shoppingcart" class="container right">
     <div class="shopping-cart z-depth-2">
       <div class="shopping-cart-header">
-        <i class="material-icons left">shopping_cart</i></i><span class="badge">3</span>
+        <i class="material-icons left">shopping_cart</i></i><span class="badge" id="cartCount"></span>
         <div class="shopping-cart-total">
           <span class="lighter-text">Total:</span>
-          <span class="main-color-text">$15.50 </span>
+          <span class="main-color-text" id="cartTotal">$15.50</span>
         </div>
       </div>
       <div id="cartBody">
       </div>
+      <a id="checkoutBtn" href="#" class="waves-effect waves-light btn">Checkout</a>
   </div>
 </div>
   <!--end container -->
@@ -139,9 +145,32 @@
   <div id='order' class="container z-depth-2 ">
   </div>
 
+  <div id="orderConf"  class="container z-depth-2">
+    <!-- <script id="orderScript" type="text/x-handlebars-template"> -->
+      <ul class="collection with-header">
+        <li class="collection-header">
+          <h4>Thanks for your order</h4>
+          <h6>Restaurant Name</h6>
+          <h6>Order # 123456 </h6>
+          <h6>Total: $25.50</h6>
+        </li>
+        {{#each}}
+        <li class="collection-item">
+          <span class="title">{{this.name}}</span>
+          <p>{{this.price}}</p>
+        </li>
+        {{/each}}
+        <a id="backtoRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
+          <span class="title">Make a new Order</span>
+        </a>
+      </ul>
+  <!-- </script> -->
+  </div>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src='/scripts/index.js' charset='utf-8'></script>
@@ -200,24 +229,6 @@
       </li>
     </ul>
     {{/each}}
-    <a id="checkoutBtn" href="#" class="waves-effect waves-light btn">Checkout</a>
   </script>
-
-  <script id="orderConf" type="text/x-handlebars-template">
-    <ul class="collection with-header">
-      <li class="collection-header">
-        <h4>Thanks for your order</h4>
-        <h6>Restaurant Name</h6>
-        <h6>Order # 123456 </h6>
-        <h6>Total: $25.50</h6>
-      </li>
-      {{#each}}
-      <li class="collection-item">
-        <span class="title">{{this.name}}</span>
-        <p>{{this.price}}</p>
-      </li>
-      {{/each}}
-    </ul>
-</script>
 
 </html>
