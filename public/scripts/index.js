@@ -95,7 +95,8 @@ $(function() {
     $('#cartCount').text(countOfCart);
     console.log('cart count', countOfCart);
     renderCart(itemsInCart);
-    $.post(`/checkout/`, {foodID: foodID, restID: restID}, renderCart);
+    // $.get(`/restaurant/${restaurantId}`, renderCart[foodID]);
+    $.post(`/checkout`, {foodID: foodID, restID: restID}, renderCart);
   });
 
   //$.post(`/checkout/delete/`, {foodID: foodID});
