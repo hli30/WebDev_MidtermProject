@@ -15,7 +15,7 @@ module.exports = (knex) => {
             .insert({
               order_id: order_id,
               food_id: food_id,
-              quantity: 2
+              quantity: 1
             })
             .returning("id")
             .then((id)=> {
@@ -63,7 +63,7 @@ module.exports = (knex) => {
     //         .insert({
     //           restaurant_id: rest_id,
     //           user_id: user_id,
-    //           status: "new"              
+    //           status: "new"
     //         })
     //         .then((order) => order[0].id);
     //     });
@@ -120,11 +120,11 @@ module.exports = (knex) => {
     //         .insert({
     //           restaurant_id: rest_id,
     //           user_id: user_id,
-    //           status: "new"              
+    //           status: "new"
     //         });
     //   // OrderId
     //   const order_id = orders[0].id;
-      
+
     //   // Promise<CheckoutItem>
     //   return saveCheckoutItem(food_id, order_id);
 
