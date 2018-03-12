@@ -1,8 +1,17 @@
+const zomato = require("../../api/zomato")
+
+const data = {
+  restInfo: null
+}
+
 exports.seed = function(knex, Promise) {
   return deleteTables(knex)
-    .then(() => seedUser(knex))
-    .then((user_ids) => seedRestaurant(knex, user_ids))
-    .then((user_restaurant_ids) => seedOrder(knex, user_restaurant_ids))
+    .then(() => zomato.getRestaurantSeed())
+    .then((restInfo) => {
+      data.restInfo = restInfo;
+      return seedUser(knex)
+    })
+    .then((user_ids) => seedRestaurant(knex))
     .then((restaurant_ids) => seedFood(knex, restaurant_ids))
 };
 
@@ -59,41 +68,14 @@ const seedUser = (knex) => {
     ])
 }
 
-const seedRestaurant = (knex, user_ids) => {
+const seedRestaurant = (knex) => {
   return knex("restaurant")
     .returning("id")
-    .insert([
-      {
-        name: "SomePlace",
-        description: "a restaurant",
-        type: "comfort",
-        phone_number: "1234567890",
-        address: "321 street",
-        email: "test@test.com",
-        user_id: user_ids[1]
-      },
-      {
-        name: "anotherPlace",
-        description: "another restaurant",
-        type: "fast food",
-        phone_number: "1114567890",
-        address: "333 street",
-        email: "test@test.com",
-        user_id: user_ids[2]
-      }
-    ])
-    .then((restaurant_ids) => {
-      return [user_ids, restaurant_ids];
-    })
+    .insert(data.restInfo)
 }
 
 const seedOrder = (knex, user_restaurant_ids) => {
   return knex("order")
-    // .insert({
-    //   user_id: user_restaurant_ids[0][0],
-    //   restaurant_id: user_restaurant_ids[1][0],
-    //   status: "not ready"
-    // })
     .then(() => {
       return user_restaurant_ids[1];
     })
@@ -103,50 +85,50 @@ const seedFood = (knex, restaurant_ids) => {
   return knex("food")
     .insert([
       {
-        name: "apple",
-        type: "app",
+        name: "Dish1",
+        type: "Appetizer",
         price: 12.5,
         cook_time_in_minutes: 5,
         restaurant_id: restaurant_ids[0]
       },
       {
-        name: "food2",
-        type: "main",
+        name: "Dish2",
+        type: "Main",
         price: 1.5,
         cook_time_in_minutes: 3,
         restaurant_id: restaurant_ids[0]
       },
       {
-        name: "meat",
-        type: "side",
+        name: "Dish3",
+        type: "Side",
         price: 10,
         cook_time_in_minutes: 10,
         restaurant_id: restaurant_ids[0]
       },
       {
-        name: "chicken",
-        type: "main",
+        name: "Dish4",
+        type: "Main",
         price: 15,
-        cook_time_in_minutes: 60,
+        cook_time_in_minutes: 20,
         restaurant_id: restaurant_ids[1]
       },
       {
-        name: "stuff",
-        type: "dessert",
+        name: "Dish5",
+        type: "Side",
         price: 1,
         cook_time_in_minutes: 10,
         restaurant_id: restaurant_ids[1]
       },
       {
-        name: "fries",
-        type: "side",
+        name: "Dish6",
+        type: "Side",
         price: 24,
-        cook_time_in_minutes: 20,
+        cook_time_in_minutes: 5,
         restaurant_id: restaurant_ids[1]
       },
       {
-        name: "salad",
-        type: "side",
+        name: "Dish7",
+        type: "Desert",
         price: 22,
         cook_time_in_minutes: 3,
         restaurant_id: restaurant_ids[1]
