@@ -114,7 +114,7 @@ $(function() {
       renderCart({order: []});
       $.get('/checkout/submit', renderOrderConf);
       // clears the cart for the next order if needed.
-      $.get(`/checkout/emptycart`, renderCart);
+      // $.get(`/checkout/emptycart`, renderCart);
     } else {
       Materialize.toast('Add items to your cart first', 1500);
     }
