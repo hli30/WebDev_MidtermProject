@@ -9,7 +9,11 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
+<<<<<<< HEAD
     const user_id = 2;
+=======
+    const user_id = 18;
+>>>>>>> e93d665334f78e445eaefd69cc4c8b87ca5fdb7f
 
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then(() => {
