@@ -3,6 +3,9 @@ $('.shopping-cart').hide();
 $('#menu').hide();
 
 $(function() {
+  //declaring the variables for cart total and length
+  var cartLength = 0;
+  var cartTotal = 0;
   // Makes sure that the cart and login arent displayed at the same time
   $("#loginregbtn").click(function() {
     if($('.shopping-cart').is(':visible')){
@@ -27,8 +30,12 @@ $(function() {
 
   //the button that hides the menu and shows the rest list
   $("#menu").on("click", '[data-return-toRest]', function() {
-    $('#restList.container').show();
-    $("#menu").hide();
+    if(cartLength > 0){
+      Materialize.toast('You cant order from multiple places, clear your cart first', 2000);
+    } else {
+      $('#restList.container').show();
+      $("#menu").hide();
+    }
   });
 
   //when done looking at the order confirmation form it hides it and then shows the restaurant list
@@ -58,17 +65,12 @@ $(function() {
   //calls the partials render function
   makePartialWithId('menuTemp');
 
-  //declaring the variables for cart total and length
-  var cartLength = 0;
-  var cartTotal = 0;
-
   //renders the cart elements including the totals, quantity badge
   var renderCart = function(itemsInCart) {
-    var templateHtml = cartTemplate(itemsInCart);
-    $("#cartBody").html(templateHtml);
-    console.log(itemsInCart);
     cartTotal = 0;
     cartLength = 0;
+    var templateHtml = cartTemplate(itemsInCart);
+    $("#cartBody").html(templateHtml);
     itemsInCart.order.forEach(function(item) {
       cartLength += Number(item.quantity);
       cartTotal += Number(item.price) * Number(item.quantity);
@@ -81,18 +83,46 @@ $(function() {
     });
   };
 
-  //should render the cart on click of the actual cart item but doesnt yet;
-  // $('#cart').on('click', function(){
-  //   $.post(`/checkout`, renderCart);
-  // });
+  //renders the cart elements including the totals, quantity badge
+  var renderEmptyCart = function(itemsInCart) {
+    cartTotal = 0;
+    cartLength = 0;
+    var templateHtml = cartTemplate(itemsInCart);
+    $("#cartBody").html(templateHtml);
+    $('#navCartBadge').text('');
+    $('#cartCount').text('');
+    $('#cartTotal').text('');
+  };
+
+
+  //formats phone nuber into (###) ### ####
+  function normalize(phone) {
+    //normalize string and remove all unnecessary characters
+    phone = phone.replace(/[^\d]/g, "");
+    //check if number length equals to 10
+    if (phone.length == 10) {
+      //reformat and return phone number
+      return phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+    }
+    return null;
+  }
 
   //renders the final order confirmation element
   var renderOrderConf = function(itemsInCart) {
     var templateHtml = orderConf(itemsInCart);
     $('#orderConf').html(templateHtml);
-    console.log(itemsInCart);
+    var restName = itemsInCart.restaurant[0].name;
+    var restPhoneNum = normalize(itemsInCart.restaurant[0].phone_number);
+    var restAddress = itemsInCart.restaurant[0].address;
+    var orderID = itemsInCart.orderID;
+    console.log('this should be the restaurant name', restName);
+    console.log('this should be the order id', orderID);
     cartTotal = 0;
     cartLength = 0;
+    $('#restName').text(restName);
+    $('#restPhoneNum').text(restPhoneNum);
+    $('#restAddress').text(restAddress);
+    $('#orderID').text('Order #:' + orderID);
     itemsInCart.order.forEach(function(item) {
       cartLength += Number(item.quantity);
       cartTotal += Number(item.price) * Number(item.quantity);
@@ -101,7 +131,7 @@ $(function() {
     });
   };
 
-  //
+  //resets on screen information regarding the cart information
   $('#checkoutBtn').on("click", function(){
     if(cartLength > 0){
       $('#navCartBadge').removeClass('new red');
@@ -114,7 +144,7 @@ $(function() {
       renderCart({order: []});
       $.get('/checkout/submit', renderOrderConf);
       // clears the cart for the next order if needed.
-      $.get(`/checkout/emptycart`, renderCart);
+      // $.get(`/checkout/emptycart`, renderCart);
     } else {
       Materialize.toast('Add items to your cart first', 1500);
     }
@@ -149,9 +179,9 @@ $(function() {
 
   //clears the current cart of all items
   $('#clearCart').on('click', function(event){
-    cartLength = 0;
-    cartTotal = 0;
-    $.get(`/checkout/emptycart`, renderCart);
+    $('#orderCount').text('');
+    $('#orderTotal').text('');
+    $.get(`/checkout/emptycart`, renderEmptyCart);
   });
 
   //renders the restaurant data with handlebars

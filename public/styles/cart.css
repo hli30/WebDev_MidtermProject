@@ -4,14 +4,15 @@
 }
 
 .shopping-cart {
-  margin-top: 0; overflow: scroll;
+  margin-top: 0;
+  overflow: hidden;
   margin-right: 5em;
   float: right;
   background: white;
   width: 100%;
   position: relative;
   border-radius: 3px;
-  padding: 20px;
+  padding: 10px;
 
   .shopping-cart-header {
     border-bottom: 1px solid #E8E8E8;
@@ -41,10 +42,6 @@
     }
   }
 
-#cartBody{
-  height: 98%;
-  overflow: auto;
-}
 
 .cart-icon {
   color: #515783;
@@ -69,8 +66,8 @@
   }
 }
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
