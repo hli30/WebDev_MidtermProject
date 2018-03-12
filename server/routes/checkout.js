@@ -10,11 +10,7 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
-<<<<<<< HEAD
-    const user_id = 19;
-=======
     const user_id = 2;
->>>>>>> c3a744883eff280fda991a52773ae9a8b368ae8b
 
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then(() => {
@@ -60,9 +56,7 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
-        console.log("before twilio")
-        twilio.msgCustomer(info);
-        console.log("after twilio")
+        // twilio.msgCustomer(info);
         return DataHelpers.updateOrderAndResetCart();
       })
   });
