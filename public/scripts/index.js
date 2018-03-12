@@ -3,6 +3,7 @@ $('.shopping-cart').hide();
 $('#menu').hide();
 
 $(function() {
+
   //declaring the variables for cart total and length
   var cartLength = 0;
   var cartTotal = 0;
@@ -143,8 +144,6 @@ $(function() {
       $('.shopping-cart').hide();
       renderCart({order: []});
       $.get('/checkout/submit', renderOrderConf);
-      // clears the cart for the next order if needed.
-      // $.get(`/checkout/emptycart`, renderCart);
     } else {
       Materialize.toast('Add items to your cart first', 1500);
     }
