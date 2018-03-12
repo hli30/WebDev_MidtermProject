@@ -3,6 +3,18 @@ $('.shopping-cart').hide();
 $('#menu').hide();
 
 $(function() {
+  var location;
+  function getLocation(){
+    if (navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else { alert("Geolocation is not supported by this browser."); }
+  }
+  var location;
+  function showPosition(position){
+    location = {lat: position.coords.latitude, lng: position.coords.longitude};
+    console.log(location);
+  }
+  getLocation();
 
   //declaring the variables for cart total and length
   var cartLength = 0;
