@@ -9,14 +9,18 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
+<<<<<<< HEAD
     const user_id = 1;
+=======
+    const user_id = 2;
+>>>>>>> 38ede1884ab3a3a2c950b9b9bfde8b3a34e37aca
 
     DataHelpers.makeOrder(rest_id, user_id, food_id)
-      .then((data) => {
-        return DataHelpers.getCheckoutCart(data);
+      .then(() => {
+        return DataHelpers.getCheckoutCart();
       })
       .then((checkoutFoods) => {
-        // console.log("checkout is:", checkoutFoods);
+        console.log("checkout is:", checkoutFoods);
         res.json({order: checkoutFoods});
       })
       .catch((err) => {
@@ -49,11 +53,13 @@ module.exports = (DataHelpers) => {
   router.get("/submit", (req, res) => {
     DataHelpers.getCheckoutInfo()
       .then((info) => {
+        console.log(info);
         res.json({
           restaurant: info[0],
           orderID: info[1],
           order: info[2]
         })
+        return DataHelpers.updateOrderAndResetCart();
       });
   });
 

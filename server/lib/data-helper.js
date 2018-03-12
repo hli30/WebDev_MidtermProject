@@ -1,6 +1,6 @@
 module.exports = (knex) => {
 
-  const orderData = {
+  let orderData = {
     food_id: null,
     restaurant_id: null,
     order_id: null
@@ -9,6 +9,7 @@ module.exports = (knex) => {
   const saveCheckoutItem = () => {
     return knex.select("food_id").from("checkout")
       .where("food_id", orderData.food_id)
+      .andWhere("order_id", orderData.order_id)
       .then((result) => {
         if (result.length === 0) {
           return knex("checkout")
@@ -17,12 +18,19 @@ module.exports = (knex) => {
               food_id: orderData.food_id,
               quantity: 1
             })
-            .returning("id")
+            .then(() => {
+              console.log("food inserted into cart");
+            })
+            // .returning("id")
         } else {
           return knex("checkout")
-            .returning("id")
+            // .returning("id")
             .where("food_id", orderData.food_id)
+            .andWhere("order_id", orderData.order_id)
             .increment("quantity", 1)
+            .then(() => {
+              console.log("food incremented");
+            })
         }
       });
   }
@@ -76,6 +84,9 @@ module.exports = (knex) => {
             return knex("order")
               .then((id) => {
                 orderData.food_id = food_id;
+                orderData.restaurant_id = rest_id;
+                orderData.food_id = food_id;
+                console.log("record exist", orderData);
                 return saveCheckoutItem()
               })
           }
@@ -107,9 +118,9 @@ module.exports = (knex) => {
     },
 
     //RESET
-    updateAndResetCart: () => {
+    updateOrderAndResetCart: () => {
       knex("order")
-        .where("order_id", orderData.order_id)
+        .where("id", orderData.order_id)
         .update({
           status: "submitted"
         })
