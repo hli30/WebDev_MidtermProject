@@ -17,6 +17,8 @@ function normalize(phone) {
   return null;
 }
 
+
+
 module.exports = {
     msgCustomer: (checkoutInfo) => {
       // console.log("twilio's info", checkoutInfo);
@@ -47,16 +49,46 @@ module.exports = {
 
       client.messages.create({
         body: msg,
-        to: process.env.TWILIO_TEST_NUM,  // Text this number
+        to: process.env.TWILIO_TEST_CUS,  // Text this number
+        from: process.env.TWILIO_PHONE // From a valid Twilio number
+      })
+      .then((message) => console.log(message.sid))
+      .catch((err) => console.log(err.message))
+    },
+
+    msgOwner: (checkoutInfo) => {
+      const restaurant = checkoutInfo[0][0];
+      const orderID = checkoutInfo[1];
+      const order = checkoutInfo[2];
+
+      let foodNames = "";
+      order.forEach((food) => {
+        foodNames += food.name + ", ";
+      })
+
+      let total = 0;
+      order.forEach((food) => {
+        total += Number(food.price);
+      })
+
+      let time = 0;
+      order.forEach((food) => {
+        time += Number(food.cook_time_in_minutes);
+      })
+      
+      const restaurantNum = normalize(restaurant.phone_number);
+
+      const msg = `-\n\nNew order placed! Order number: ${orderID}.\n\nDishes ordered: ${foodNames} totalling $${total}.\n\n` +
+        `Promised to be ready in ${time} minutes.`
+
+      client.messages.create({
+        body: msg,
+        to: process.env.TWILIO_TEST_OWN,  // Text this number
         from: process.env.TWILIO_PHONE // From a valid Twilio number
       })
       .then((message) => console.log(message.sid))
       .catch((err) => console.log(err.message))
     }
-
-    // msgOwner: () => {
-
-    // }
 }
 
 

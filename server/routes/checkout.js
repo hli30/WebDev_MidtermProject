@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router  = express.Router();
-// const twilio = require("../twilio/controller");
+const twilio = require("../twilio/controller");
 
 module.exports = (DataHelpers) => {
 
@@ -56,7 +56,8 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
-        // twilio.msgCustomer(info);
+        twilio.msgCustomer(info);
+        twilio.msgOwner(info);
         return DataHelpers.updateOrderAndResetCart();
       })
   });
