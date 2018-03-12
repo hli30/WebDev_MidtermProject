@@ -114,21 +114,21 @@ const seedFood = (knex, restaurant_ids) => {
       },
       {
         name: "Dish5",
-        type: "Desert",
+        type: "Side",
         price: 1,
         cook_time_in_minutes: 10,
         restaurant_id: restaurant_ids[1]
       },
       {
-        name: "Dish5",
+        name: "Dish6",
         type: "Side",
         price: 24,
         cook_time_in_minutes: 5,
         restaurant_id: restaurant_ids[1]
       },
       {
-        name: "Dish6",
-        type: "Side",
+        name: "Dish7",
+        type: "Desert",
         price: 22,
         cook_time_in_minutes: 3,
         restaurant_id: restaurant_ids[1]
