@@ -131,11 +131,6 @@ module.exports = (knex) => {
             order_id: null
           }
         });     
-    },
-
-    //TWILIO
-    getTwilioMsgData: () => {
-
     }
   }
 }

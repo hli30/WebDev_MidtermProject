@@ -1,7 +1,8 @@
 "use strict";
 
-const express = require('express');
+const express = require("express");
 const router  = express.Router();
+const twilio = require("../twilio/controller");
 
 module.exports = (DataHelpers) => {
 
@@ -9,11 +10,7 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
-<<<<<<< HEAD
-    const user_id = 1;
-=======
     const user_id = 2;
->>>>>>> 38ede1884ab3a3a2c950b9b9bfde8b3a34e37aca
 
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then(() => {
@@ -59,8 +56,11 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
+        console.log("before twilio")
+        twilio.msgCustomer(info);
+        console.log("after twilio")
         return DataHelpers.updateOrderAndResetCart();
-      });
+      })
   });
 
   return router;
