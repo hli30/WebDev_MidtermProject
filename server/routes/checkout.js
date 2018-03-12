@@ -56,13 +56,7 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
-<<<<<<< HEAD
-        // console.log("before twilio")
         // twilio.msgCustomer(info);
-        // console.log("after twilio")
-=======
-        // twilio.msgCustomer(info);
->>>>>>> feat/twilio
         return DataHelpers.updateOrderAndResetCart();
       })
   });
