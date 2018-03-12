@@ -4,14 +4,17 @@
 }
 
 body {
-
-  background-image: url(../images/lum3n-352940-unsplash.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
+
 html {
-    height: 100%
+  background: url(../images/lum3n-352940-unsplash.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 h5 {
@@ -29,13 +32,10 @@ h5 {
   opacity: 0.95;
 }
 
-
-
 #restaurantList.container{
   margin-left: 50px;
 
 }
-
 
 .nav-fixed {
    position: fixed;

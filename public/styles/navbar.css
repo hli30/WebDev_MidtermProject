@@ -1,6 +1,13 @@
 #nav-mobile {
   margin-right: 5em;
 }
+
+
+/* I know that !important isng good practive */
+/* but materialize is being difficult */
+#loginregbtn{
+  background-color: #558b2f!important;
+}
 .cart-icon {
   color: #515783;
   font-size: 24px;

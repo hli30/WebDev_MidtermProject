@@ -1,12 +1,17 @@
 
+#shoppingcart{
+    height: 450px;
+}
 #shoppingcart.container{
   margin-top: 9px;
+  height: 100%;
 }
 
 .shopping-cart {
   margin-top: 0;
   overflow: hidden;
   margin-right: 5em;
+  overflow-y: scroll;
   float: right;
   background: white;
   width: 100%;

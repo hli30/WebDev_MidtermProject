@@ -22,25 +22,29 @@
 </head>
 
 <header>
-  <div class="navbar-fixed">
+
     <nav class="nav">
       <div class="nav-wrapper red accent-4">
         <a href="#" class="brand-logo center">Neglect the plates</a>
-        <ul id="nav-mobile" class="right">
-          <li><a id="loginregbtn" class="waves-effect waves-light btn light-green darken-1">Login </a></li>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a id="loginregbtn" class="waves-effect waves-light btn light-green 2darken-4">Login </a></li>
           <li><a href="#" id="cart"><i class="material-icons left">shopping_cart</i>Cart<span class="badge" id="navCartBadge"></span></a>
           </li>
         </ul>
       </div>
     </nav>
-  </div>
+
+
+
 </header>
 
+<body>
 
 
   <!-- LOGIN & REGISTER -->
   <div class="loginreg container white z-depth-2 right">
-    <ul class="tabs light-green darken-1">
+    <ul class="tabs light-green darken-4">
       <li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
       <li class="tab col s3"><a class="white-text" href="#register">register</a></li>
     </ul>
@@ -62,7 +66,7 @@
           </div>
           <br>
           <center>
-            <button class="btn waves-effect waves-light light-green darken-1" type="submit" action="/login" name="action">Connect</button>
+            <button class="btn waves-effect waves-light light-green darken-4" type="submit" action="/login" name="action">Connect</button>
             <br>
             <br>
           </center>
@@ -108,7 +112,7 @@
             </div>
           </div>
           <center>
-            <button class="btn waves-effect waves-light light-green darken-1" type="submit" name="action">Submit</button>
+            <button class="btn waves-effect waves-light light-green darken-4" type="submit" name="action">Submit</button>
           </center>
         </div>
       </form>
@@ -124,29 +128,30 @@
           <span class="main-color-text" id="cartTotal"></span>
         </div>
       </div>
-      <a id="checkoutBtn" href="#" class="waves-effect waves-light btn">Checkout</a>
-      <a id="clearCart" type="submit" class="fooditem secondary-content"><i class="material-icons">clear</i></a>
+      <a id="checkoutBtn" href="#" class="waves-effect waves-light btn light-green darken-4">Checkout</a>
+      <a id="clearCart" type="submit" class="fooditem secondary-content"><i class="material-icons light-green-text text-darken-4">clear</i></a>
       <div id="cartBody">
       </div>
     </div>
   </div>
 
-    <!-- Restaurants  -->
-     <div id="restlist" class="container z-depth-2">
-     </div>
+  <!-- Restaurants  -->
+   <div id="restlist" class="container z-depth-2">
+   </div>
 
-     <!-- Menu  -->
-     <div id='menu' class="container z-depth-2 ">
-     </div>
+   <!-- Menu  -->
+   <div id='menu' class="container z-depth-2">
+   </div>
 
-     <!-- Order Confirmation -->
-     <div id="orderConf" class="container z-depth-2">
-     </div>
-
-
+   <!-- Order Confirmation -->
+   <div id="orderConf" class="container z-depth-2">
+   </div>
 
 
+
+  </div>
 </body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 
@@ -162,7 +167,7 @@
     </li>
     {{#each restaurants}}
     <li>
-      <a data-restaurant-id="{{this.id}}" method="GET" action="/:{{this.id}}" class="collection-item showRestaurantMenu" type="submit">
+      <a data-restaurant-id="{{this.id}}" method="GET" action="/:{{this.id}}" class="collection-item showRestaurantMenu light-green-text text-darken-4" type="submit">
         <div>
           <span class="title">{{this.name}}</span>
           <p>{{this.description}}<br> {{this.address}} &amp; {{this.phone_number}}</p>
@@ -182,7 +187,7 @@
       <h6>Address</h6>
     </li>
     {{#each menu}}
-    <a id="{{this.id}}" href="#!" class="collection-item foodthing" data-foodid="{{this.id}}" data-restid="{{this.restaurant_id}}" onclick="Materialize.toast('Added to cart', 1500)">
+    <a id="{{this.id}}" href="#!" class="collection-item foodthing light-green-text text-darken-4" data-foodid="{{this.id}}" data-restid="{{this.restaurant_id}}" onclick="Materialize.toast('Added to cart', 1500)">
       <li id="listID">
         <span class="title"><h5>{{this.name}}</h5></span>
         <p data-foodid="{{this.id}}">{{this.type}}<br> {{this.price}}
@@ -190,7 +195,7 @@
       </li>
     </a>
     {{/each}}
-    <a id="menuToRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
+    <a id="menuToRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item light-green-text text-darken-4">
         <span class="title">Back to Restaurants</span>
       </a>
   </ul>
@@ -201,7 +206,7 @@
   {{#each order}}
   <ul class="collection">
     <li class=" collection-item ">
-      <a id="removeFromCart" data-cartfoodid="{{this.id}}" type="submit" class="fooditem secondary-content"><i class="material-icons medium ">remove</i></a>
+      <a id="removeFromCart" data-cartfoodid="{{this.id}}" type="submit" class="fooditem secondary-content"><i class="material-icons medium light-green-text text-darken-4">remove</i></a>
       <span class="title"><h5>{{this.name}}</h5></span>
       <p>${{this.price}} <br/> {{this.quantity}}
     </li>
@@ -222,14 +227,14 @@
       <h6 id="orderTotal"></h6>
     </li>
     {{#each order}}
-    <li class="collection-item">
+    <li class="collection-item light-green-text text-darken-4">
       <span class="title">{{this.name}}</span>
       <p>${{this.price}}</p>
       <p>{{this.quantity}}</p>
     </li>
     {{/each}}
-    <a id="backtoRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item">
-        <span class="title">Make a new Order</span>
+    <a id="backtoRest" data-return-toRest="{{this.id}}" type="submit" class="collection-item ">
+        <span class="title light-green-text text-darken-4">Make a new Order</span>
       </a>
   </ul>
 </script>

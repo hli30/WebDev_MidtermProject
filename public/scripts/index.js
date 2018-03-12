@@ -4,6 +4,7 @@ $('#menu').hide();
 
 $(function() {
 
+
   //declaring the variables for cart total and length
   var cartLength = 0;
   var cartTotal = 0;
@@ -41,8 +42,8 @@ $(function() {
 
   //when done looking at the order confirmation form it hides it and then shows the restaurant list
   $("#orderConf").on("click", '[data-return-toRest]', function() {
+    $('#orderConf').empty();
     $('#restList.container').show();
-    $('#orderConf').hide();
     $("#menu").hide();
   });
 
@@ -76,7 +77,7 @@ $(function() {
       cartLength += Number(item.quantity);
       cartTotal += Number(item.price) * Number(item.quantity);
       if(cartLength > 0){
-        $('#navCartBadge').addClass('new red');
+        $('#navCartBadge').addClass('new light-green darken-4');
       }
       $('#navCartBadge').text(cartLength);
       $('#cartCount').text(cartLength);
@@ -110,14 +111,14 @@ $(function() {
 
   //renders the final order confirmation element
   var renderOrderConf = function(itemsInCart) {
+    console.log('inside order conf render');
     var templateHtml = orderConf(itemsInCart);
+    console.log(templateHtml)
     $('#orderConf').html(templateHtml);
     var restName = itemsInCart.restaurant[0].name;
     var restPhoneNum = normalize(itemsInCart.restaurant[0].phone_number);
     var restAddress = itemsInCart.restaurant[0].address;
     var orderID = itemsInCart.orderID;
-    console.log('this should be the restaurant name', restName);
-    console.log('this should be the order id', orderID);
     cartTotal = 0;
     cartLength = 0;
     $('#restName').text(restName);
@@ -135,14 +136,14 @@ $(function() {
   //resets on screen information regarding the cart information
   $('#checkoutBtn').on("click", function(){
     if(cartLength > 0){
-      $('#navCartBadge').removeClass('new red');
+      $('orderConf').show();
+      $('#navCartBadge').removeClass('new light-green darken-1');
       $('#navCartBadge').text('');
       $('#cartCount').text('');
       $('#cartTotal').text('');
       $('#restList.container').hide();
       $("#menu").hide();
       $('.shopping-cart').hide();
-      renderCart({order: []});
       $.get('/checkout/submit', renderOrderConf);
     } else {
       Materialize.toast('Add items to your cart first', 1500);
@@ -198,4 +199,5 @@ $(function() {
 
   //calls the load restaurant lists
   loadRestaurants();
+
 });
