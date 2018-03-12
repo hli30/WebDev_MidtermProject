@@ -8,6 +8,19 @@ body {
   padding: 0px;
 }
 
+#logoDHDH{
+  margin-left: 50px;
+  height:100px;
+}
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 85px;
+}
 
 html {
   background: url(../images/lum3n-352940-unsplash.jpg) no-repeat center center fixed;
@@ -30,12 +43,13 @@ h5 {
 	margin-top: 80px;
 	width: 400px;
   opacity: 0.95;
-}
-
-#restaurantList.container{
-  margin-left: 50px;
 
 }
+
+#menu.container{
+  width:356px;
+}
+
 
 .nav-fixed {
    position: fixed;

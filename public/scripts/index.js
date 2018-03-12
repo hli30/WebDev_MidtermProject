@@ -1,32 +1,50 @@
-$('.loginreg').hide();
+$('#loginform').hide();
 $('.shopping-cart').hide();
 $('#menu').hide();
 
 $(function() {
 
-
   //declaring the variables for cart total and length
   var cartLength = 0;
   var cartTotal = 0;
   // Makes sure that the cart and login arent displayed at the same time
+  //pretends to log a user in
   $("#loginregbtn").click(function() {
+    var logincheck = $('#loginregbtn').text();
+    if( logincheck === 'Login'){
+      $("#loginform").fadeToggle();
+    }
+    if( logincheck === 'Logout'){
+      $('#loginregbtn').text('Login');
+      Materialize.toast('Logged out', 2000);
+    }
     if($('.shopping-cart').is(':visible')){
       $('.shopping-cart').hide();
     }
-    $(".loginreg").fadeToggle();
   });
 
+  $('#registerUser').on('click', function(){
+    $('#registerForm').trigger("reset");
+    $('#loginregbtn').text('Logout');
+    $('#loginform').hide();
+  });
+
+  $('#loginButton').on('click', function(){
+    $('#loginform').trigger("reset");
+    $('#loginregbtn').text('Logout');
+    $('#loginform').hide();
+  });
   //shows and hides the shopping cart but makes sure that the login isnt visible
   $("#cart").on("click", function() {
-    if($('.loginreg').is(':visible')){
-      $('.loginreg').hide();
+    if($('#loginform').is(':visible')){
+      $('#loginform').hide();
     }
     $(".shopping-cart").fadeToggle();
   });
 
   //shows or hides the menu/restaurant list as needed
   $(".showRestaurantMenu").on("click", function() {
-    $('#restList.container').hide();
+    $('#renderedRestaurants').hide();
     $("#menu").show();
   });
 
@@ -35,15 +53,15 @@ $(function() {
     if(cartLength > 0){
       Materialize.toast('You cant order from multiple places, clear your cart first', 2000);
     } else {
-      $('#restList.container').show();
-      $("#menu").hide();
+      $('#renderedRestaurants').show();
+      $("#menu").empty();
     }
   });
 
-  //when done looking at the order confirmation form it hides it and then shows the restaurant list
+  //when done looking at the order confirmation form it empties the div it and then shows the restaurant list
   $("#orderConf").on("click", '[data-return-toRest]', function() {
     $('#orderConf').empty();
-    $('#restList.container').show();
+    $('#renderedRestaurants').show();
     $("#menu").hide();
   });
 
@@ -111,9 +129,7 @@ $(function() {
 
   //renders the final order confirmation element
   var renderOrderConf = function(itemsInCart) {
-    console.log('inside order conf render');
     var templateHtml = orderConf(itemsInCart);
-    console.log(templateHtml)
     $('#orderConf').html(templateHtml);
     var restName = itemsInCart.restaurant[0].name;
     var restPhoneNum = normalize(itemsInCart.restaurant[0].phone_number);
@@ -135,6 +151,11 @@ $(function() {
 
   //resets on screen information regarding the cart information
   $('#checkoutBtn').on("click", function(){
+    var loggedInCheck = $('#loginregbtn').text();
+    if(loggedInCheck === "Login"){
+      Materialize.toast('Login or register first', 1500);
+      return;
+    }
     if(cartLength > 0){
       $('orderConf').show();
       $('#navCartBadge').removeClass('new light-green darken-1');
@@ -166,7 +187,7 @@ $(function() {
   //renders menu based on the restaurant click
   $("#restlist").on("click", '[data-restaurant-id]', function(event) {
     const restaurantId = $(this).data('restaurantId');
-    $('#restList.container').hide();
+    $('#renderedRestaurants').hide();
     $("#menu").show();
     $.get(`/restaurant/${restaurantId}`, renderMenu);
   });
@@ -196,8 +217,6 @@ $(function() {
   var loadRestaurants = function() {
     $.get("/restaurant", renderRestaurants);
   };
-
   //calls the load restaurant lists
   loadRestaurants();
-
 });

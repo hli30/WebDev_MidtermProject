@@ -1,5 +1,11 @@
-.loginreg{
+#loginform{
+  position: static;
+  z-index: 1;
+}
+
+#loginform.container{
     margin-right: 5em;
+    width: 300px;
 }
 .tabs .indicator {
 	background-color: #e0f2f1;
