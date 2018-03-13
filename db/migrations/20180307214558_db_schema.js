@@ -23,7 +23,7 @@ exports.up = function(knex, Promise) {
       table.string("phone_number")
       table.string("address")
       // table.string("email")
-
+      
       table.integer("user_id").unsigned();      
       table.foreign("user_id").references("id").inTable("user");
     })

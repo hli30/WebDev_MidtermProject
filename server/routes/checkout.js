@@ -57,7 +57,7 @@ module.exports = (DataHelpers) => {
           order: info[2]
         })
         // twilio.msgCustomer(info);
-        // twilio.msgOwner(info);
+        twilio.msgOwner(info);
         return DataHelpers.updateOrderAndResetCart();
       })
   });
