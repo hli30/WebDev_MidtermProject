@@ -1,14 +1,7 @@
-# Node Skeleton
+# Neglect the Plates
+"Neglect the Plates" is a single page application built in 5 days with a team of two for Lighthouse Web Dev Bootcamp's mid-term project. This app simulates a food ordering website where a user can place orders to local restaurants, and receive SMS confirmation of the order details.
 
-## Project Setup
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
 
 ## Getting Started
 

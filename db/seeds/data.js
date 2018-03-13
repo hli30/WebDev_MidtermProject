@@ -1,5 +1,6 @@
 const zomato = require("../../api/zomato")
 
+//Internal data obj for ease of access
 const data = {
   restInfo: null
 }

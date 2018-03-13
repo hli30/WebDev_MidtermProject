@@ -20,7 +20,6 @@ module.exports = (DataHelpers) => {
         return DataHelpers.getCheckoutCart();
       })
       .then((checkoutFoods) => {
-        console.log("checkout is:", checkoutFoods);
         res.json({order: checkoutFoods});
       })
       .catch((err) => {
@@ -57,17 +56,16 @@ module.exports = (DataHelpers) => {
   router.get("/submit", (req, res) => {
     DataHelpers.getCheckoutInfo()
       .then((info) => {
-        console.log(info);
         res.json({
           restaurant: info[0],
           orderID: info[1],
           order: info[2]
         })
-        // twilio.msgCustomer(info);
+        twilio.msgCustomer(info);
         twilio.msgOwner(info);
         return DataHelpers.updateOrderAndResetCart();
       })
   });
-
+    
   return router;
 };

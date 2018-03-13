@@ -67,7 +67,6 @@ module.exports = (knex) => {
                 orderData.order_id = id[0];
                 orderData.restaurant_id = rest_id;
                 orderData.food_id = food_id;
-                console.log("record inserted", orderData);
                 return saveCheckoutItem();
               })
           } else {
@@ -76,7 +75,6 @@ module.exports = (knex) => {
                 orderData.food_id = food_id;
                 orderData.restaurant_id = rest_id;
                 orderData.food_id = food_id;
-                console.log("record exist", orderData);
                 return saveCheckoutItem()
               })
           }
