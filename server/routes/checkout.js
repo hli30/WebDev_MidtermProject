@@ -56,7 +56,7 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
-        // twilio.msgCustomer(info);
+        twilio.msgCustomer(info);
         twilio.msgOwner(info);
         return DataHelpers.updateOrderAndResetCart();
       })
