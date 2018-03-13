@@ -1,0 +1,23 @@
+#loginform{
+  position: static;
+  z-index: 1;
+}
+
+#loginform.container{
+    margin-right: 5em;
+    width: 300px;
+}
+.tabs .indicator {
+	background-color: #e0f2f1;
+	height: 100%;
+	opacity: 0.3;
+}
+
+.form-container {
+	padding: 40px;
+	padding-top: 10px;
+}
+
+.confirmation-tabs-btn {
+	position: relative;
+}

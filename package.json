@@ -1,29 +1,46 @@
 {
-  "name": "node-skeleton",
+  "name": "skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Project Setup",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "local": "./node_modules/.bin/nodemon --ignore public/",
-    "knex": "./node_modules/.bin/knex"
+    "start": "node ./server.js",
+    "local": "nodemon --ignore public/",
+    "knex": "knex",
+    "reset": "knex migrate:rollback && knex migrate:latest && knex seed:run"
   },
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cart-js": "^1.0.3",
     "dotenv": "^2.0.0",
     "ejs": "^2.4.1",
+    "eslint": "^4.18.2",
     "express": "^4.13.4",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.3.1",
     "knex": "^0.11.7",
     "knex-logger": "^0.1.0",
+    "materialize": "^1.0.0",
     "morgan": "^1.7.0",
     "node-sass-middleware": "^0.9.8",
-    "pg": "^6.0.2"
+    "pg": "^6.0.2",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "require-new": "^1.1.1",
+    "twilio": "^3.13.0"
   },
   "devDependencies": {
-    "nodemon": "^1.9.2",
-    "sqlite3": "^3.1.4"
-  }
+    "nodemon": "^1.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hli30/WebDev_MidtermProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hli30/WebDev_MidtermProject/issues"
+  },
+  "homepage": "https://github.com/hli30/WebDev_MidtermProject#readme"
 }
