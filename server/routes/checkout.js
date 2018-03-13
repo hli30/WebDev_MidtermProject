@@ -10,8 +10,11 @@ module.exports = (DataHelpers) => {
     const food_id = req.body.foodID;
     const rest_id = req.body.restID;
 
+    //Hardcoded test user_id as user login not implemented
     const user_id = 2;
 
+    //Initiate a new order in db if it doesn't exist, and save each items 
+    //into checkout table and send the current checkout data back to front-end
     DataHelpers.makeOrder(rest_id, user_id, food_id)
       .then(() => {
         return DataHelpers.getCheckoutCart();
@@ -26,6 +29,7 @@ module.exports = (DataHelpers) => {
 
   });
 
+  //Deletes an item from the checkout table
   router.post("/delete", (req, res) => {
     const food_id = req.body.foodID;
     DataHelpers.removeCheckoutItem(food_id)
@@ -37,6 +41,7 @@ module.exports = (DataHelpers) => {
       })
   });
 
+  //Deletes the entire checkout table and the referenced order
   router.get("/emptycart", (req, res) => {
     DataHelpers.emptyCart()
       .then(() => {
@@ -47,6 +52,8 @@ module.exports = (DataHelpers) => {
       })
   });
 
+  //Sends to the front-end the current checkout info, sends SMS msg using twilio
+  //then reset checkout and change the order status
   router.get("/submit", (req, res) => {
     DataHelpers.getCheckoutInfo()
       .then((info) => {
@@ -56,7 +63,7 @@ module.exports = (DataHelpers) => {
           orderID: info[1],
           order: info[2]
         })
-        twilio.msgCustomer(info);
+        // twilio.msgCustomer(info);
         twilio.msgOwner(info);
         return DataHelpers.updateOrderAndResetCart();
       })

@@ -17,7 +17,8 @@ const normalize = (phone) => {
   return null;
 }
 
-//Parse incoming order info and return an object with necessary info needed to compose SMS msg
+//Parse incoming order info and return an object with necessary info 
+//needed to compose SMS msg
 const parseInfo = (checkoutInfo) => {
   const restaurant = checkoutInfo[0][0];
   const orderID = checkoutInfo[1];
