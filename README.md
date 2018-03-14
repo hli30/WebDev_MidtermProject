@@ -36,5 +36,5 @@ Back-end by Harry Li:
 - Install all dependencies by using `npm install` command.
 - Create a .env file and fill the required info using the ".env-template" as outline.
 - Create schemas and seed your PostgreSQL database by using `npm run reset`.
-- Run the development web server using the npm start command.
+- Run the development web server using the `npm start` command.
 - Go to localhost:8080 or your customized port if you created one in your .env.
