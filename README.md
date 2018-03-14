@@ -1,22 +1,40 @@
 # Neglect the Plates
 "Neglect the Plates" is a single page application built in 5 days with a team of two for Lighthouse Web Dev Bootcamp's mid-term project. This app simulates a food ordering website where a user can place orders to local restaurants, and receive SMS confirmation of the order details.
 
+## Technologies / Frameworks
+Front-end by David Haynes:
+- jQuery, AJAX, Materialize, Handlebars.js
 
+Back-end by Harry Li:
+- PostgreSQL, Node.js, Knex.js, Express, Zomato API, Twilio API
 
-## Getting Started
-
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+## Screenshots
+!["Restaurants list"]()
+!["Checkout cart"]()
+!["Order confirmation"]()
 
 ## Dependencies
 
 - Node 5.10.x or above
 - NPM 3.8.x or above
+- body-parser
+- dotenv
+- express
+- handlebars
+- jquery
+- knex
+- knex-logger
+- materialize
+- morgan
+- pg
+- request
+- request-promise
+- require-new
+
+## Getting Started
+
+- Install all dependencies by using `npm install` command.
+- Create a .env file and fill the required info using the ".env-template" as outline.
+- Create schemas and seed your PostgreSQL database by using `npm run reset`.
+- Run the development web server using the npm start command.
+- Go to localhost:8080 or your customized port if you created one in your .env.
