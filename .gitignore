@@ -1,5 +1,6 @@
 node_modules/
-public/styles
+public/vendors
 .env
+.DS_Store
 *.log
 *.sqlite3

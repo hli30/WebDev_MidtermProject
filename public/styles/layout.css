@@ -1,0 +1,61 @@
+#cart{
+  height:100%;
+  width:100%;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+#logoDHDH{
+  margin-left: 50px;
+  height:100px;
+}
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 85px;
+}
+
+html {
+  background: url(../images/lum3n-352940-unsplash.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h5 {
+	font-weight: 400;
+}
+
+
+#shoppingcart{
+  margin-top:40px;
+}
+
+.container {
+	margin-top: 80px;
+	width: 400px;
+  opacity: 0.95;
+
+}
+
+#menu.container{
+  width:356px;
+}
+
+
+.nav-fixed {
+   position: fixed;
+   right: 0;
+   left: 0;
+   top: 0;
+   margin-bottom: 0px;
+   z-index: 997;
+ }
