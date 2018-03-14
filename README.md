@@ -9,9 +9,9 @@ Back-end by Harry Li:
 - PostgreSQL, Node.js, Knex.js, Express, Zomato API, Twilio API
 
 ## Screenshots
-!["Restaurants list"]()
-!["Checkout cart"]()
-!["Order confirmation"]()
+!["Restaurants list"](https://github.com/hli30/WebDev_MidtermProject/blob/dev/docs/restaurants-list.png)
+!["Checkout cart"](https://github.com/hli30/WebDev_MidtermProject/blob/dev/docs/checkout-cart.png)
+!["Order confirmation"](https://github.com/hli30/WebDev_MidtermProject/blob/dev/docs/order-confirmation.png)
 
 ## Dependencies
 
